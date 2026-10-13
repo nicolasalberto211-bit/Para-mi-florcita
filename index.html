@@ -73,10 +73,49 @@ footer{text-align:center;padding:30px 10px 50px;color:#a45b78}
     height: 300px;
   }
 }
+/* Visor para ampliar las fotografías */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(25, 10, 20, 0.92);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.lightbox.activo {
+  display: flex;
+}
+.lightbox img {
+  max-width: 95%;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 14px;
+}
+.lightbox-cerrar {
+  position: absolute;
+  top: 15px;
+  right: 22px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 42px;
+  cursor: pointer;
+}
+body.lightbox-abierto {
+  overflow: hidden;
+}  
 </style>
 </head>
 <body>
 <main>
+<div class="lightbox" id="visorFotos" aria-modal="true" role="dialog" aria-label="Foto ampliada">
+  <button class="lightbox-cerrar" id="cerrarVisor" aria-label="Cerrar foto">&times;</button>
+  <img id="fotoAmpliada" src="" alt="Recuerdo de nuestra relación">
+</div>
 <section class="hero" id="inicio">
   <div class="flower">🌷</div>
   <div class="kicker">Hecho con mucho amor</div>
@@ -111,7 +150,7 @@ footer{text-align:center;padding:30px 10px 50px;color:#a45b78}
 </div>
 <div class="photo">
   <img src="girasoles.jpg" alt="Un ramo de girasoles">
-  <p>Un detalle para mi florcita 🌻</p>
+  <p>Un detalle de mi florcita 🌻</p>
 </div>
 <div class="photo">
   <img src="mascarillas.jpg" alt="Un momento divertido juntos">
@@ -179,6 +218,33 @@ document.addEventListener("click", (e) => {
     heart.style.fontSize = (18 + Math.random()*18) + "px";
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 6200);
+  }
+});
+const visorFotos = document.getElementById("visorFotos");
+const fotoAmpliada = document.getElementById("fotoAmpliada");
+const cerrarVisor = document.getElementById("cerrarVisor");
+document.querySelectorAll(".photo img").forEach((foto) => {
+  foto.style.cursor = "zoom-in";
+  foto.addEventListener("click", () => {
+    fotoAmpliada.src = foto.src;
+    fotoAmpliada.alt = foto.alt || "Recuerdo de nuestra relación";
+    visorFotos.classList.add("activo");
+    document.body.classList.add("lightbox-abierto");
+  });.
+function cerrarFotoAmpliada() {
+  visorFotos.classList.remove("activo");
+  document.body.classList.remove("lightbox-abierto");
+  fotoAmpliada.src = "";
+}
+cerrarVisor.addEventListener("click", cerrarFotoAmpliada);
+visorFotos.addEventListener("click", (evento) => {
+  if (evento.target === visorFotos) {
+    cerrarFotoAmpliada();
+  }
+});
+document.addEventListener("keydown", (evento) => {
+  if (evento.key === "Escape") {
+    cerrarFotoAmpliada();
   }
 });
 </script>
