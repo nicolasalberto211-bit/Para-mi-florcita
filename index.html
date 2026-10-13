@@ -504,6 +504,68 @@
         transition: none;
       }
     }
+  .music-player {
+  max-width: 440px;
+  margin: 25px auto 0;
+  padding: 28px 20px;
+  border-radius: 25px;
+  background: linear-gradient(145deg, #fff0f6, #ffffff);
+  border: 1px solid #f0ccdc;
+  box-shadow: 0 12px 30px rgba(183, 79, 121, 0.13);
+}
+
+.music-cover {
+  width: 115px;
+  height: 115px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 58px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #f9c6da, #fff4f8);
+  box-shadow: 0 7px 20px rgba(183, 79, 121, 0.16);
+}
+
+.music-player h3 {
+  color: #a74770;
+  margin-bottom: 5px;
+}
+
+.music-subtitle {
+  font-size: 14px;
+  margin-top: 0;
+  color: #946b7d;
+}
+
+.music-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 22px 0;
+  font-size: 12px;
+  color: #946b7d;
+}
+
+#progressBar {
+  flex: 1;
+  min-width: 0;
+  accent-color: #b74f79;
+  cursor: pointer;
+}
+
+#playPauseButton {
+  width: 100%;
+}
+
+#playPauseButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#musicStatus {
+  margin-bottom: 0;
+}  
   </style>
 </head>
 
@@ -715,30 +777,58 @@
       </div>
     </section>
 
-    <section id="cancion" class="reveal">
-      <div class="flower">🎵</div>
-      <h2>Nuestra canción</h2>
+    
+<section id="cancion" class="reveal">
+  <div class="flower">🎵</div>
+  <h2>Nuestra canción</h2>
 
-      <p class="center">
-        Porque hay canciones que nos ayudan a expresar lo que sentimos. 💗
-      </p>
+  <p class="center">
+    Un pedacito de nuestra historia, para ti, mi florcita. ❤️
+  </p>
 
-      <p><strong>Reik - Inolvidable</strong></p>
+  <div class="music-player">
+    <div class="music-cover">🌷</div>
 
-      <a
-        class="btn"
-        id="songButton"
-        href="https://youtu.be/zjpSX6fCPDc?si=U4OLpEOVpp9FdMiT"
-        target="_blank"
-        rel="noopener noreferrer"
+    <div class="music-info">
+      <strong>Inolvidable</strong>
+      <span>Reik · Nuestra canción 💗</span>
+    </div>
+
+    <button
+      type="button"
+      id="playMusic"
+      class="play-button"
+      aria-label="Reproducir canción"
+    >▶</button>
+
+    <audio id="loveAudio" preload="metadata">
+      <source
+        src="Reik%20-%20Inolvidable%20(Video).mp3"
+        type="audio/mpeg"
       >
-        ▶ Escuchar nuestra canción
-      </a>
+      Tu navegador no admite la reproducción de audio.
+    </audio>
 
-      <p class="small">
-        Se abrirá YouTube en una nueva pestaña.
-      </p>
-    </section>
+    <div class="music-progress">
+      <span id="currentTime">0:00</span>
+      <input
+        type="range"
+        id="progress"
+        min="0"
+        max="100"
+        value="0"
+        step="0.1"
+        aria-label="Posición de la canción"
+      >
+      <span id="duration">0:00</span>
+    </div>
+
+    <p id="musicStatus" class="music-status">
+      Pulsa el corazón para escuchar nuestra canción.
+    </p>
+  </div>
+</section>
+
 
     <section id="tiempo" class="reveal">
       <h2>Y que sigan los recuerdos... ⏳</h2>
@@ -1041,6 +1131,77 @@
         { once: true }
       );
     });
+    ```javascript
+// Funcionamiento del reproductor de música.
+const audio = document.getElementById("romanticAudio");
+const playButton = document.getElementById("playPauseButton");
+const progressBar = document.getElementById("progressBar");
+const currentTimeText = document.getElementById("currentTime");
+const durationText = document.getElementById("duration");
+const musicStatus = document.getElementById("musicStatus");
+
+function formatTime(seconds) {
+  if (!Number.isFinite(seconds)) return "0:00";
+
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+
+  return minutes + ":" + String(remainingSeconds).padStart(2, "0");
+}
+
+playButton.addEventListener("click", async () => {
+  if (audio.paused) {
+    try {
+      await audio.play();
+    } catch (error) {
+      musicStatus.textContent =
+        "No se pudo reproducir. Revisa que el MP3 esté subido a GitHub.";
+    }
+  } else {
+    audio.pause();
+  }
+});
+
+audio.addEventListener("play", () => {
+  playButton.textContent = "❚❚ Pausar canción";
+  musicStatus.textContent = "Reproduciendo para ti 💗";
+});
+
+audio.addEventListener("pause", () => {
+  playButton.textContent = "▶ Reproducir nuestra canción";
+});
+
+audio.addEventListener("loadedmetadata", () => {
+  durationText.textContent = formatTime(audio.duration);
+});
+
+audio.addEventListener("timeupdate", () => {
+  currentTimeText.textContent = formatTime(audio.currentTime);
+
+  if (Number.isFinite(audio.duration) && audio.duration > 0) {
+    progressBar.value = (audio.currentTime / audio.duration) * 100;
+  }
+});
+
+progressBar.addEventListener("input", () => {
+  if (Number.isFinite(audio.duration) && audio.duration > 0) {
+    audio.currentTime =
+      (Number(progressBar.value) / 100) * audio.duration;
+  }
+});
+
+audio.addEventListener("ended", () => {
+  playButton.textContent = "▶ Reproducir nuevamente";
+  progressBar.value = 0;
+  currentTimeText.textContent = "0:00";
+  musicStatus.textContent = "¿La escuchamos otra vez? 🌷";
+});
+
+audio.addEventListener("error", () => {
+  musicStatus.textContent =
+    "No encontramos el MP3. Revisa su nombre y ubicación.";
+});
+```
   </script>
 </body>
 </html>
