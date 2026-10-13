@@ -125,7 +125,6 @@ body.lightbox-abierto {
   <div aria-hidden="true" style="position:absolute;top:12%;left:9%;font-size:1.5rem">♡</div>
   <div aria-hidden="true" style="position:absolute;bottom:14%;right:10%;font-size:2rem">♡</div>
 </section>
-
 <section id="carta">
   <h2>Unas palabras para ti 💌</h2>
   <div class="note">
@@ -167,7 +166,6 @@ body.lightbox-abierto {
   </div>
   <p class="small center"></p>
 </section>
-
 <section id="cancion">
   <h2>Nuestra canción 🎶</h2>
   <p class="center">Hay canciones que se convierten en recuerdos. Pulsa aquí para escuchar la que elijamos juntos.</p>
@@ -176,7 +174,6 @@ body.lightbox-abierto {
   </div>
   <p class="small center"></p>
 </section>
-
 <section id="tiempo">
   <h2>Y que sigan los recuerdos… ⏳</h2>
   <p class="center">Cada día a tu lado suma una historia más.</p>
@@ -184,7 +181,6 @@ body.lightbox-abierto {
   <p class="center">días compartiendo esta historia ❤️</p>
   <p class="small center"></p>
 </section>
-
 <section class="center">
   <div class="flower">💗</div>
   <h2>Mi lugar favorito</h2>
@@ -199,27 +195,27 @@ body.lightbox-abierto {
 // 2) Escribe la fecha en que comenzó la relación en formato AAAA-MM-DD.
 // Ejemplo: const fechaInicio = "2024-02-14";
 const enlaceCancion = "https://youtu.be/2Vv-BfVoq4g?list=RD2Vv-BfVoq4g";
-const fechaInicio = "2025-08-27"; // Ejemplo: "2024-02-14"
-
+const fechaInicio = "2025-08-27"; // Ejemplo: "2024-02-14"  
+document.getElementById("songButton").href = enlaceCancion;
 const contador = document.getElementById("days");
-if (contador && fechaInicio) {
-  const partes = fechaInicio.split("-").map(Number);
-  const inicio = new Date(
-    partes[0],
-    partes[1] - 1,
-    partes[2]
-  );
-  const hoy = new Date();
-  hoy.setHours(0, 0, 0, 0);
-  if (!Number.isNaN(inicio.getTime())) {
+function actualizarContador() {
+  if (!contador) return;
+    const [anio, mes, dia] = fechaInicio.split("-").map(Number);
+    const inicio = new Date(anio, mes - 1, dia);
+    const hoy = new Date();
+    inicio.setHours(0, 0, 0, 0);
+    hoy.setHours(0, 0, 0, 0);
+    if (Number.isNaN(inicio.getTime())) {
+      contador.textContent = "Fecha inválida";
+      return;
+    }
     const dias = Math.max(
       0,
       Math.floor((hoy - inicio) / 86400000)
     );
-    contador.textContent =
-      dias.toLocaleString("es-CL");
+    contador.textContent = dias.toLocaleString("es-CL");
   }
-}
+  actualizarContador();
 document.addEventListener("click", (e) => {
   if (e.target.closest("a,button")) {
     const heart = document.createElement("span");
