@@ -201,12 +201,23 @@ body.lightbox-abierto {
 const enlaceCancion = "https://youtu.be/2Vv-BfVoq4g?list=RD2Vv-BfVoq4g";
 const fechaInicio = "2025-08-27"; // Ejemplo: "2024-02-14"
 
-document.getElementById("songButton").href = enlaceCancion;
-if (fechaInicio) {
-  const start = new Date(fechaInicio + "T00:00:00");
-  if (!Number.isNaN(start.getTime())) {
-    const days = Math.max(0, Math.floor((new Date() - start) / 86400000));
-    document.getElementById("days").textContent = days.toLocaleString("es-CL");
+const contador = document.getElementById("days");
+if (contador && fechaInicio) {
+  const partes = fechaInicio.split("-").map(Number);
+  const inicio = new Date(
+    partes[0],
+    partes[1] - 1,
+    partes[2]
+  );
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  if (!Number.isNaN(inicio.getTime())) {
+    const dias = Math.max(
+      0,
+      Math.floor((hoy - inicio) / 86400000)
+    );
+    contador.textContent =
+      dias.toLocaleString("es-CL");
   }
 }
 document.addEventListener("click", (e) => {
