@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff0f5">
+<title>Para mi florcita 🌷</title>
+<style>
+:root{--pink:#d86f96;--rose:#a9446d;--cream:#fffaf7;--ink:#563744;--pale:#ffe8f0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at top,#fff 0,#fff3f7 45%,#ffeaf1 100%);color:var(--ink);font-family:Georgia,'Times New Roman',serif}
+main{max-width:850px;margin:auto;padding:22px}
+section{margin:22px 0;padding:clamp(22px,5vw,42px);background:#ffffffd9;border:1px solid #f4d3df;border-radius:26px;box-shadow:0 12px 35px #a9446d12}
+.hero{min-height:82vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:linear-gradient(150deg,#fffaf8,#ffe7f0)}
+.kicker{font:600 .78rem Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--rose)}
+h1{font-size:clamp(2.7rem,9vw,5rem);line-height:1.02;margin:18px 0;color:var(--rose);font-weight:normal}
+h2{font-size:clamp(1.7rem,5vw,2.5rem);font-weight:normal;text-align:center;color:var(--rose);margin:0 0 18px}
+p{font-size:1.12rem;line-height:1.8}
+.center{text-align:center}
+.flower{font-size:3rem;animation:sway 3s ease-in-out infinite}
+.btn{display:inline-block;border:0;border-radius:999px;background:var(--rose);color:white;padding:14px 22px;font-size:1rem;text-decoration:none;cursor:pointer;margin:7px;font-family:Arial,sans-serif;box-shadow:0 7px 18px #a9446d25}
+.btn.secondary{background:#fff;color:var(--rose);border:1px solid #e9b6ca}
+.photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.photo{min-height:180px;border-radius:18px;background:linear-gradient(135deg,#ffe8f0,#fff7ef);border:1px dashed #d98eaa;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;color:#a65b79;font: .95rem Arial,sans-serif;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.note{background:#fff6f9;border-left:3px solid #df91ad;padding:18px 20px;border-radius:8px}
+.counter{font-size:clamp(1.8rem,7vw,3.5rem);color:var(--rose);text-align:center;font-weight:bold}
+.small{font: .85rem Arial,sans-serif;color:#946879}
+.heart{position:fixed;bottom:-30px;pointer-events:none;z-index:5;animation:floatUp 6s linear forwards;opacity:.8}
+footer{text-align:center;padding:30px 10px 50px;color:#a45b78}
+@keyframes floatUp{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+@keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@media(max-width:520px){main{padding:12px}.photo-grid{grid-template-columns:1fr}.photo{min-height:220px}.hero{min-height:76vh}}
+</style>
+</head>
+<body>
+<main>
+<section class="hero" id="inicio">
+  <div class="flower">🌷</div>
+  <div class="kicker">Hecho con mucho amor</div>
+  <h1>Para mi<br>florcita</h1>
+  <p class="center">Un pequeño rincón de internet, hecho especialmente para ti. ❤️</p>
+  <a class="btn" href="#carta">Tengo algo que decirte 💌</a>
+  <div aria-hidden="true" style="position:absolute;top:12%;left:9%;font-size:1.5rem">♡</div>
+  <div aria-hidden="true" style="position:absolute;bottom:14%;right:10%;font-size:2rem">♡</div>
+</section>
+
+<section id="carta">
+  <h2>Unas palabras para ti 💌</h2>
+  <div class="note">
+    <p>Mi amor, a veces me pongo a pensar en lo afortunado que soy de tenerte en mi vida. Entre tantas personas, nuestros caminos se cruzaron y eso es algo que agradezco muchísimo.</p>
+    <p>Me encanta compartir contigo los días bonitos, las risas, las pequeñas locuras y hasta esos momentos en los que simplemente estar juntos es suficiente. No necesito que todo sea perfecto; quiero seguir aprendiendo contigo, apoyarte y crear recuerdos que algún día miremos con una sonrisa.</p>
+    <p>Quiero que nunca olvides lo importante que eres para mí. Gracias por ser mi compañera y por darle algo tan bonito a mi vida. Ojalá nos queden muchísimas aventuras, abrazos y razones para elegirnos una y otra vez.</p>
+    <p><strong>Te amo, mi florcita. ❤️</strong></p>
+  </div>
+  <p class="small center">Puedes editar esta carta dentro del archivo index.html para que suene aún más a ti.</p>
+</section>
+
+<section id="recuerdos">
+  <h2>Nuestros recuerdos 📸</h2>
+  <p class="center">Estos espacios son para poner las fotos que más significan para nosotros.</p>
+  <div class="photo-grid">
+    <div class="photo">📷<br>Agrega aquí su primera foto</div>
+    <div class="photo">🌅<br>Un momento inolvidable</div>
+    <div class="photo">🥰<br>Una foto que te haga sonreír</div>
+    <div class="photo">✨<br>Un recuerdo que quieras guardar</div>
+  </div>
+  <p class="small center">Para añadir fotos: sube las imágenes al repositorio y cambia cada recuadro por una etiqueta &lt;img src="foto.jpg" alt="Nuestro recuerdo"&gt;.</p>
+</section>
+
+<section id="cancion">
+  <h2>Nuestra canción 🎶</h2>
+  <p class="center">Hay canciones que se convierten en recuerdos. Pulsa aquí para escuchar la que elijamos juntos.</p>
+  <div class="center">
+    <a class="btn" id="songButton" href="https://www.youtube.com/" target="_blank" rel="noopener">▶ Escuchar nuestra canción</a>
+  </div>
+  <p class="small center">El botón abrirá YouTube. Más abajo, en el código, puedes cambiar el enlace por el de su canción.</p>
+</section>
+
+<section id="tiempo">
+  <h2>Y que sigan los recuerdos… ⏳</h2>
+  <p class="center">Cada día a tu lado suma una historia más.</p>
+  <div class="counter" id="days">∞</div>
+  <p class="center">días compartiendo esta historia ❤️</p>
+  <p class="small center">Cuando quieras, configura la fecha de inicio en el código para activar el contador.</p>
+</section>
+
+<section class="center">
+  <div class="flower">💗</div>
+  <h2>Mi lugar favorito</h2>
+  <p>Mi lugar favorito no siempre es un sitio; muchas veces eres tú, y todos esos momentos simples que se vuelven especiales cuando los compartimos.</p>
+  <a class="btn secondary" href="#inicio">Volver al comienzo ↑</a>
+</section>
+<footer>Hecho con amor, para mi florcita 🌷</footer>
+</main>
+<script>
+// PERSONALIZA ESTOS DOS DATOS:
+// 1) Cambia el enlace por el enlace de YouTube de su canción.
+// 2) Escribe la fecha en que comenzó la relación en formato AAAA-MM-DD.
+// Ejemplo: const fechaInicio = "2024-02-14";
+const enlaceCancion = "https://www.youtube.com/";
+const fechaInicio = ""; // Ejemplo: "2024-02-14"
+
+document.getElementById("songButton").href = enlaceCancion;
+if (fechaInicio) {
+  const start = new Date(fechaInicio + "T00:00:00");
+  if (!Number.isNaN(start.getTime())) {
+    const days = Math.max(0, Math.floor((new Date() - start) / 86400000));
+    document.getElementById("days").textContent = days.toLocaleString("es-CL");
+  }
+}
+document.addEventListener("click", (e) => {
+  if (e.target.closest("a,button")) {
+    const heart = document.createElement("span");
+    heart.className = "heart";
+    heart.textContent = ["♡","♥","💗","✨"][Math.floor(Math.random()*4)];
+    heart.style.left = (10 + Math.random()*80) + "vw";
+    heart.style.fontSize = (18 + Math.random()*18) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6200);
+  }
+});
+</script>
+</body>
+</html>
