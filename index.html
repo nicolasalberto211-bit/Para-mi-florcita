@@ -583,7 +583,54 @@
       <a class="btn" href="#carta">Tengo algo que decirte 💌</a>
       <a class="btn secondary" href="#recuerdos">Nuestros recuerdos 📸</a>
     </section>
+<section id="cancion" class="reveal">
+  <div class="flower">🎵</div>
+  <h2>De Mi, para Ti😞</h2>
 
+  <p class="center">
+    Un pedacito de nuestra historia, para ti, mi florcita. ❤️
+  </p>
+
+  <div class="music-player">
+    <div class="music-cover">🌷</div>
+
+    <div class="music-info">
+      <strong>Inolvidable</strong>
+      <span>Reik · Nuestra canción 💗</span>
+    </div>
+
+    <button
+      type="button"
+      id="playMusic"
+      class="play-button"
+      aria-label="Reproducir canción"
+    >▶</button>
+
+    <audio id="loveAudio" preload="metadata">
+  <source src="./Reik%20-%20Inolvidable%20%28Video%29.mp3" type="audio/mpeg">
+  Tu navegador no admite la reproducción de audio.
+</audio>
+
+    <div class="music-progress">
+      <span id="currentTime">0:00</span>
+      <input
+        type="range"
+        id="progress"
+        min="0"
+        max="100"
+        value="0"
+        step="0.1"
+        aria-label="Posición de la canción"
+      >
+      <span id="duration">0:00</span>
+    </div>
+
+    <p id="musicStatus" class="music-status">
+      Pulsa el corazón para escuchar nuestra canción.
+    </p>
+  </div>
+</section>
+    
     <section id="carta" class="reveal">
       <div class="flower">💌</div>
       <h2>Unas palabras para ti</h2>
@@ -776,57 +823,6 @@
         </p>
       </div>
     </section>
-
-    
-<section id="cancion" class="reveal">
-  <div class="flower">🎵</div>
-  <h2>De Mi, para Ti😞</h2>
-
-  <p class="center">
-    Un pedacito de nuestra historia, para ti, mi florcita. ❤️
-  </p>
-
-  <div class="music-player">
-    <div class="music-cover">🌷</div>
-
-    <div class="music-info">
-      <strong>Inolvidable</strong>
-      <span>Reik · Nuestra canción 💗</span>
-    </div>
-
-    <button
-      type="button"
-      id="playMusic"
-      class="play-button"
-      aria-label="Reproducir canción"
-    >▶</button>
-
-    <audio id="loveAudio" preload="metadata">
-  <source src="./Reik%20-%20Inolvidable%20%28Video%29.mp3" type="audio/mpeg">
-  Tu navegador no admite la reproducción de audio.
-</audio>
-
-    <div class="music-progress">
-      <span id="currentTime">0:00</span>
-      <input
-        type="range"
-        id="progress"
-        min="0"
-        max="100"
-        value="0"
-        step="0.1"
-        aria-label="Posición de la canción"
-      >
-      <span id="duration">0:00</span>
-    </div>
-
-    <p id="musicStatus" class="music-status">
-      Pulsa el corazón para escuchar nuestra canción.
-    </p>
-  </div>
-</section>
-
-
     <section id="tiempo" class="reveal">
       <h2>Y que sigan los recuerdos... ⏳</h2>
 
