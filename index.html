@@ -1,235 +1,522 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#fff0f5">
-<title>Para mi florcita 🌷</title>
-<style>
-:root{--pink:#d86f96;--rose:#a9446d;--cream:#fffaf7;--ink:#563744;--pale:#ffe8f0}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(circle at top,#fff 0,#fff3f7 45%,#ffeaf1 100%);color:var(--ink);font-family:Georgia,'Times New Roman',serif}
-main{max-width:850px;margin:auto;padding:22px}
-section{margin:22px 0;padding:clamp(22px,5vw,42px);background:#ffffffd9;border:1px solid #f4d3df;border-radius:26px;box-shadow:0 12px 35px #a9446d12}
-.hero{min-height:82vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:linear-gradient(150deg,#fffaf8,#ffe7f0)}
-.kicker{font:600 .78rem Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--rose)}
-h1{font-size:clamp(2.7rem,9vw,5rem);line-height:1.02;margin:18px 0;color:var(--rose);font-weight:normal}
-h2{font-size:clamp(1.7rem,5vw,2.5rem);font-weight:normal;text-align:center;color:var(--rose);margin:0 0 18px}
-p{font-size:1.12rem;line-height:1.8}
-.center{text-align:center}
-.flower{font-size:3rem;animation:sway 3s ease-in-out infinite}
-.btn{display:inline-block;border:0;border-radius:999px;background:var(--rose);color:white;padding:14px 22px;font-size:1rem;text-decoration:none;cursor:pointer;margin:7px;font-family:Arial,sans-serif;box-shadow:0 7px 18px #a9446d25}
-.btn.secondary{background:#fff;color:var(--rose);border:1px solid #e9b6ca}
-.photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.photo{min-height:180px;border-radius:18px;background:linear-gradient(135deg,#ffe8f0,#fff7ef);border:1px dashed #d98eaa;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;color:#a65b79;font: .95rem Arial,sans-serif;overflow:hidden}
-.photo img{width:100%;height:100%;object-fit:cover;display:block}
-.note{background:#fff6f9;border-left:3px solid #df91ad;padding:18px 20px;border-radius:8px}
-.counter{font-size:clamp(1.8rem,7vw,3.5rem);color:var(--rose);text-align:center;font-weight:bold}
-.small{font: .85rem Arial,sans-serif;color:#946879}
-.heart{position:fixed;bottom:-30px;pointer-events:none;z-index:5;animation:floatUp 6s linear forwards;opacity:.8}
-footer{text-align:center;padding:30px 10px 50px;color:#a45b78}
-@keyframes floatUp{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
-@keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
-@media(max-width:520px){main{padding:12px}.photo-grid{grid-template-columns:1fr}.photo{min-height:220px}.hero{min-height:76vh}}
-/* Galería romántica: fotos y textos ordenados */
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  align-items: start;}
-.photo {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  min-width: 0;
-  min-height: 0;
-  overflow: hidden;
-  padding: 10px;
-  text-align: center;
-  box-sizing: border-box;}
-.photo img {
-  display: block;
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 12px;}
-.photo p {
-  display: block;
-  width: 100%;
-  margin: 12px 0 4px;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-  text-align: center;}
-@media (max-width: 520px) {
-  .photo-grid {
-    grid-template-columns: 1fr;}
-  .photo img {
-    height: 300px;}}
-/* Visor para ampliar las fotografías */
-.lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(25, 10, 20, 0.92);
-  align-items: center;
-  justify-content: center;
-  padding: 20px;}
-.lightbox.activo {
-  display: flex;}
-.lightbox img {
-  max-width: 95%;
-  max-height: 85vh;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  border-radius: 14px;}
-.lightbox-cerrar {
-  position: absolute;
-  top: 15px;
-  right: 22px;
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 42px;
-  cursor: pointer;}
-body.lightbox-abierto {
-  overflow: hidden;}  
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff0f5">
+  <title>Para mi florcita 🌷</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: #62364b;
+      background: linear-gradient(180deg, #fff4f7, #fce8ef);
+      overflow-x: hidden;
+    }
+
+    section {
+      width: min(900px, 92%);
+      margin: 28px auto;
+      padding: 38px 24px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid #f5dce6;
+      border-radius: 24px;
+      box-shadow: 0 8px 28px rgba(130, 53, 82, 0.08);
+    }
+
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #ffe1eb, #fff7fa);
+    }
+
+    .flower {
+      font-size: 60px;
+      margin-bottom: 10px;
+    }
+
+    .kicker {
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #b65e82;
+    }
+
+    h1 {
+      font-size: clamp(38px, 8vw, 68px);
+      margin: 18px 0;
+      color: #a74770;
+    }
+
+    h2 {
+      font-size: clamp(25px, 5vw, 36px);
+      color: #a74770;
+      margin-top: 0;
+    }
+
+    p {
+      font-size: 17px;
+      line-height: 1.9;
+    }
+
+    .center {
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 10px 5px;
+      padding: 13px 23px;
+      border: 0;
+      border-radius: 30px;
+      background: #b74f79;
+      color: white;
+      text-decoration: none;
+      font: inherit;
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: #96385f;
+    }
+
+    .secondary {
+      background: #fff0f5;
+      color: #a74770;
+      border: 1px solid #efcada;
+    }
+
+    .letter {
+      white-space: normal;
+      text-align: left;
+    }
+
+    .counter {
+      font-size: clamp(44px, 12vw, 76px);
+      font-weight: bold;
+      color: #bd527e;
+      margin: 20px 0;
+    }
+
+    .small {
+      font-size: 13px;
+      color: #946b7d;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+      margin-top: 25px;
+    }
+
+    .photo {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 15px;
+      cursor: zoom-in;
+      background: #f8e4ec;
+      border: 1px solid #f0d6e1;
+      transition: transform 0.2s;
+    }
+
+    .photo:hover {
+      transform: scale(1.02);
+    }
+
+    .caption {
+      font-size: 14px;
+      margin: 8px 0 15px;
+    }
+
+    .memory {
+      min-width: 0;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(35, 15, 26, 0.94);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 95%;
+      max-height: 85vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    .close {
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      color: white;
+      background: transparent;
+      border: none;
+      font-size: 42px;
+      cursor: pointer;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -35px;
+      z-index: 10000;
+      pointer-events: none;
+      animation: floatUp 3s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-110vh) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 15px;
+      color: #a74770;
+    }
+
+    @media (max-width: 520px) {
+      section {
+        padding: 30px 18px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .photo {
+        height: 260px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<main>
-<div class="lightbox" id="visorFotos" aria-modal="true" role="dialog" aria-label="Foto ampliada">
-  <button class="lightbox-cerrar" id="cerrarVisor" aria-label="Cerrar foto">&times;</button>
-  <img id="fotoAmpliada" src="" alt="Recuerdo de nuestra relación">
-</div>
-<section class="hero" id="inicio">
-  <div class="flower">🌷</div>
-  <div class="kicker">Hecho con mucho amor</div>
-  <h1>Para mi<br>florcita</h1>
-  <p class="center">Un pequeño rincón de internet, hecho especialmente para ti. ❤️</p>
-  <a class="btn" href="#carta">Tengo algo que decirte 💌</a>
-  <div aria-hidden="true" style="position:absolute;top:12%;left:9%;font-size:1.5rem">♡</div>
-  <div aria-hidden="true" style="position:absolute;bottom:14%;right:10%;font-size:2rem">♡</div>
-</section>
-<section id="carta">
-  <h2>Unas palabras para ti 💌</h2>
-  <div class="note">
-    <p>Mi amor, a veces me pongo a pensar en lo afortunado que soy de tenerte en mi vida. Entre tantas personas, nuestros caminos se cruzaron y eso es algo que agradezco muchísimo.</p>
-    <p>Me encanta compartir contigo los días bonitos, las risas, las pequeñas locuras y hasta esos momentos en los que simplemente estar juntos es suficiente. No necesito que todo sea perfecto; quiero seguir aprendiendo contigo, apoyarte y crear recuerdos que algún día miremos con una sonrisa.</p>
-    <p>Quiero que nunca olvides lo importante que eres para mí. Gracias por ser mi compañera y por darle algo tan bonito a mi vida. Ojalá nos queden muchísimas aventuras, abrazos y razones para elegirnos una y otra vez.</p>
-    <p><strong>Te amo, mi florcita. ❤️</strong></p>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="flower">🌷</div>
+      <div class="kicker">Hecho con mucho amor</div>
+      <h1>Para mi florcita</h1>
+
+      <p class="center">
+        Un pequeño rincón de internet, hecho especialmente para ti. 💗
+      </p>
+
+      <a class="btn" href="#carta">Tengo algo que decirte 💌</a>
+      <a class="btn secondary" href="#recuerdos">Nuestros recuerdos 📸</a>
+    </section>
+
+    <section id="carta">
+      <div class="flower">💌</div>
+      <h2>Unas palabras para ti</h2>
+
+      <div class="center letter">
+        <p>Mi amor, mi florcita hermosa:</p>
+
+        <p>
+          Quise crear este pequeño espacio para recordarte lo especial
+          que eres para mí. A veces las palabras no alcanzan para expresar
+          todo lo que siento, pero quería dejarte algo bonito que pudieras
+          visitar y recordar siempre.
+        </p>
+
+        <p>
+          Gracias por los momentos que compartimos, por las risas,
+          por las tonterías que nos hacen felices y por cada recuerdo
+          que vamos construyendo juntos.
+        </p>
+
+        <p>
+          No necesito que todos los días sean perfectos. Quiero seguir
+          compartiendo contigo los días bonitos y también aquellos en
+          los que necesitamos apoyarnos más.
+        </p>
+
+        <p>
+          Ojalá, cuando vuelvas a leer estas palabras, recuerdes cuánto
+          te quiero y lo importante que eres en mi vida.
+        </p>
+
+        <p>
+          Con todo mi amor, para ti, mi florcita. ❤️
+        </p>
+      </div>
+    </section>
+
+    <section id="cancion">
+      <div class="flower">🎵</div>
+      <h2>Nuestra canción</h2>
+
+      <p class="center">
+        Porque hay canciones que nos ayudan a expresar lo que sentimos. 💗
+      </p>
+
+      <p><strong>Perfect — Ed Sheeran</strong></p>
+
+      <a
+        class="btn"
+        id="songButton"
+        href="https://www.youtube.com/watch?v=2Vv-BfVoq4g"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ▶ Escuchar nuestra canción
+      </a>
+
+      <p class="small">
+        Se abrirá YouTube en una nueva pestaña.
+      </p>
+    </section>
+
+    <section id="tiempo">
+      <h2>Y que sigan los recuerdos... ⏳</h2>
+
+      <p class="center">
+        Cada día a tu lado suma una historia más.
+      </p>
+
+      <div class="counter" id="days">Calculando...</div>
+
+      <p>días compartiendo esta historia ❤️</p>
+
+      <p class="small">
+        Desde el 27 de agosto de 2025.
+      </p>
+    </section>
+
+    <section id="recuerdos">
+      <div class="flower">📸</div>
+      <h2>Nuestros recuerdos</h2>
+
+      <p class="center">
+        Pequeños momentos que se convierten en grandes recuerdos.
+        Toca una foto para verla ampliada. 💕
+      </p>
+
+      <div class="gallery">
+        <div class="memory">
+          <img class="photo" src="monitos.jpg"
+               alt="Uno de nuestros recuerdos juntos" loading="lazy">
+          <p class="caption">Un recuerdo especial ❤️</p>
+        </div>
+
+        <div class="memory">
+          <img class="photo" src="capitan.jpg"
+               alt="Nuestro recuerdo con Capitán" loading="lazy">
+          <p class="caption">Momentos que alegran el corazón 🐾</p>
+        </div>
+
+        <div class="memory">
+          <img class="photo" src="girasoles.jpg"
+               alt="Un recuerdo de girasoles" loading="lazy">
+          <p class="caption">Como un pequeño girasol 🌻</p>
+        </div>
+
+        <div class="memory">
+          <img class="photo" src="mascarillas.jpg"
+               alt="Un momento divertido juntos" loading="lazy">
+          <p class="caption">Nuestras locuras 😂</p>
+        </div>
+
+        <div class="memory">
+          <img class="photo" src="piscina.jpg"
+               alt="Un recuerdo de un día especial" loading="lazy">
+          <p class="caption">Días para recordar ☀️</p>
+        </div>
+
+        <div class="memory">
+          <img class="photo" src="tonterias.jpg"
+               alt="Una de nuestras tonterías" loading="lazy">
+          <p class="caption">Y muchas tonterías más 💗</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sorpresa">
+      <div class="flower">💝</div>
+      <h2>Una última sorpresa</h2>
+
+      <p class="center">
+        Si pudiera elegir de nuevo, me encantaría seguir creando
+        recuerdos contigo.
+      </p>
+
+      <button class="btn" id="surpriseButton" type="button">
+        Pulsa aquí, mi amor 💗
+      </button>
+
+      <p id="surpriseMessage" hidden>
+        Eres una personita muy especial para mí.
+        Gracias por formar parte de mi historia. Te quiero muchísimo. 🌷❤️
+      </p>
+
+      <p>
+        <a class="btn secondary" href="#inicio">Volver al comienzo ↑</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Hecho con amor, para mi florcita 🌷
+  </footer>
+
+  <div class="lightbox" id="visorFotos"
+       role="dialog" aria-modal="true" aria-label="Foto ampliada">
+    <button class="close" id="cerrarVisor"
+            type="button" aria-label="Cerrar foto">×</button>
+    <img id="fotoAmpliada" src="" alt="">
   </div>
-  <p class="small center"></p>
-</section>
-<section id="recuerdos">
-  <h2>Nuestros recuerdos 📸</h2>
-  <p class="center">Estos espacios son para poner las fotos que más significan para nosotros.</p>
-  <div class="photo-grid">
-<div class="photo">
-  <img src="monitos.jpg" alt="Nuestras tonterías juntos">
-  <p>Nuestra complicidad 🐒❤️</p>
-</div>
-<div class="photo">
-  <img src="capitan.jpg" alt="Nosotros junto a Capitán">
-  <p>Nuestra pequeña familia 🐶</p>
-</div>
-<div class="photo">
-  <img src="girasoles.jpg" alt="Un ramo de girasoles">
-  <p>Un detalle de mi florcita 🌻</p>
-</div>
-<div class="photo">
-  <img src="mascarillas.jpg" alt="Un momento divertido juntos">
-  <p>Hasta nuestras locuras son especiales 💗</p>
-</div>
-<div class="photo">
-  <img src="pscina.jpg" alt="Un recuerdo de nosotros">
-  <p>Más recuerdos por vivir ☀️</p>
-</div>
-<div class="photo">
-  <img src="tonterias.jpg" alt="La Primera vez que Te Vi💗">
-  <p>La Primera vez que Te Vi💗</p>
-</div>
-  </div>
-  <p class="small center"></p>
-</section>
-<section id="cancion">
-  <h2>Nuestra canción 🎶</h2>
-  <p class="center">Hay canciones que se convierten en recuerdos. Pulsa aquí para escuchar la que elijamos juntos.</p>
-  <div class="center">
-    <a class="btn" id="songButton" href="https://www.youtube.com/" target="_blank" rel="noopener">▶ Escuchar nuestra canción</a>
-  </div>
-  <p class="small center"></p>
-</section>
-<section id="tiempo">
-  <h2>Y que sigan los recuerdos… ⏳</h2>
-  <p class="center">Cada día a tu lado suma una historia más.</p>
-  <div class="counter" id="days">∞</div>
-  <p class="center">días compartiendo esta historia ❤️</p>
-  <p class="small center"></p>
-</section>
-<section class="center">
-  <div class="flower">💗</div>
-  <h2>Mi lugar favorito</h2>
-  <p>Mi lugar favorito no siempre es un sitio; muchas veces eres tú, y todos esos momentos simples que se vuelven especiales cuando los compartimos.</p>
-  <a class="btn secondary" href="#inicio">Volver al comienzo ↑</a>
-</section>
-<footer>Hecho con amor, para mi florcita 🌷</footer>
-</main>
-<script>
-// PERSONALIZA ESTOS DOS DATOS:
-// 1) Cambia el enlace por el enlace de YouTube de su canción.
-// 2) Escribe la fecha en que comenzó la relación en formato AAAA-MM-DD.
-// Ejemplo: const fechaInicio = "2024-02-14";
-const enlaceCancion = "https://youtu.be/zjpSX6fCPDc";
-const fechaInicio = "2025-08-27"; // Ejemplo: "2024-02-14"  
-document.getElementById("songButton").href = enlaceCancion;
-const contador = document.getElementById("days");
-function actualizarContador() {
-  if (!contador) return;
-    const [anio, mes, dia] = fechaInicio.split("-").map(Number);
-    const inicio = new Date(anio, mes - 1, dia);
-    const hoy = new Date();
-    inicio.setHours(0, 0, 0, 0);
-    hoy.setHours(0, 0, 0, 0);
-    if (Number.isNaN(inicio.getTime())) {
-      contador.textContent = "Fecha inválida";
-      return;}
-    const dias = Math.max(0,
-      Math.floor((hoy - inicio) / 86400000));
-    contador.textContent = dias.toLocaleString("es-CL");}
-  actualizarContador();
-document.addEventListener("click", (e) => {
-  if (e.target.closest("a,button")) {
-    const heart = document.createElement("span");
-    heart.className = "heart";
-    heart.textContent = ["♡","♥","💗","✨"][Math.floor(Math.random()*4)];
-    heart.style.left = (10 + Math.random()*80) + "vw";
-    heart.style.fontSize = (18 + Math.random()*18) + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6200);}});
-const visorFotos = document.getElementById("visorFotos");
-const fotoAmpliada = document.getElementById("fotoAmpliada");
-const cerrarVisor = document.getElementById("cerrarVisor");
-document.querySelectorAll(".photo img").forEach((foto) => {
-  foto.style.cursor = "zoom-in";
-  foto.addEventListener("click", () => {
-    fotoAmpliada.src = foto.src;
-    fotoAmpliada.alt = foto.alt || "Recuerdo de nuestra relación";
-    visorFotos.classList.add("activo");
-    document.body.classList.add("lightbox-abierto");});.
-function cerrarFotoAmpliada() {
-  visorFotos.classList.remove("activo");
-  document.body.classList.remove("lightbox-abierto");
-  fotoAmpliada.src = "";}
-cerrarVisor.addEventListener("click", cerrarFotoAmpliada);
-visorFotos.addEventListener("click", (evento) => {
-  if (evento.target === visorFotos) {
-    cerrarFotoAmpliada();}});
-document.addEventListener("keydown", (evento) => {
-  if (evento.key === "Escape") {
-    cerrarFotoAmpliada();}});
-</script>
+
+  <script>
+    "use strict";
+
+    // Fecha en que comenzó nuestra relación.
+    const fechaInicio = "2025-08-27";
+
+    // Contador de días.
+    function actualizarContador() {
+      const contador = document.getElementById("days");
+      if (!contador) return;
+
+      const partes = fechaInicio.split("-").map(Number);
+      const inicio = new Date(
+        partes[0], partes[1] - 1, partes[2]
+      );
+
+      const hoy = new Date();
+      inicio.setHours(0, 0, 0, 0);
+      hoy.setHours(0, 0, 0, 0);
+
+      if (Number.isNaN(inicio.getTime())) {
+        contador.textContent = "Fecha inválida";
+        return;
+      }
+
+      const dias = Math.max(
+        0,
+        Math.floor((hoy.getTime() - inicio.getTime()) / 86400000)
+      );
+
+      contador.textContent = dias.toLocaleString("es-CL");
+    }
+
+    actualizarContador();
+
+    // Galería de fotos ampliables.
+    const visor = document.getElementById("visorFotos");
+    const fotoAmpliada = document.getElementById("fotoAmpliada");
+    const cerrarVisor = document.getElementById("cerrarVisor");
+
+    function cerrarFoto() {
+      visor.classList.remove("active");
+      fotoAmpliada.src = "";
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".photo").forEach((foto) => {
+      foto.addEventListener("click", () => {
+        if (!foto.naturalWidth) return;
+
+        fotoAmpliada.src = foto.src;
+        fotoAmpliada.alt = foto.alt;
+        visor.classList.add("active");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    cerrarVisor.addEventListener("click", cerrarFoto);
+
+    visor.addEventListener("click", (evento) => {
+      if (evento.target === visor) {
+        cerrarFoto();
+      }
+    });
+
+    document.addEventListener("keydown", (evento) => {
+      if (evento.key === "Escape") {
+        cerrarFoto();
+      }
+    });
+
+    // Sorpresa romántica.
+    document.getElementById("surpriseButton")
+      .addEventListener("click", () => {
+        const mensaje = document.getElementById("surpriseMessage");
+        mensaje.hidden = false;
+        lanzarCorazones(20);
+      });
+
+    // Animación de corazones.
+    function lanzarCorazones(cantidad) {
+      const simbolos = ["❤️", "💕", "💗", "💖", "🌷"];
+
+      for (let i = 0; i < cantidad; i++) {
+        const corazon = document.createElement("span");
+
+        corazon.className = "heart";
+        corazon.textContent =
+          simbolos[Math.floor(Math.random() * simbolos.length)];
+
+        corazon.style.left = Math.random() * 100 + "vw";
+        corazon.style.fontSize =
+          (18 + Math.random() * 20) + "px";
+        corazon.style.animationDelay =
+          (Math.random() * 1.5) + "s";
+
+        document.body.appendChild(corazon);
+
+        corazon.addEventListener("animationend", () => {
+          corazon.remove();
+        });
+      }
+    }
+  </script>
+
 </body>
 </html>
