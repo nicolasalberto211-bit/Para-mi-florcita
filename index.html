@@ -802,12 +802,9 @@
     >▶</button>
 
     <audio id="loveAudio" preload="metadata">
-      <source
-        src="Reik%20-%20Inolvidable%20(Video).mp3"
-        type="audio/mpeg"
-      >
-      Tu navegador no admite la reproducción de audio.
-    </audio>
+  <source src="./Reik%20-%20Inolvidable%20%28Video%29.mp3" type="audio/mpeg">
+  Tu navegador no admite la reproducción de audio.
+</audio>
 
     <div class="music-progress">
       <span id="currentTime">0:00</span>
@@ -1131,7 +1128,6 @@
         { once: true }
       );
     });
-   ```javascript
 // Controles del reproductor personalizado.
 const loveAudio = document.getElementById("loveAudio");
 const playMusic = document.getElementById("playMusic");
@@ -1202,7 +1198,6 @@ loveAudio.addEventListener("error", () => {
   musicStatus.textContent =
     "No se encuentra el audio. Comprueba el nombre del archivo.";
 });
-```
   </script>
 </body>
 </html>
