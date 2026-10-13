@@ -565,6 +565,102 @@
 
 #musicStatus {
   margin-bottom: 0;
+} 
+  /* 🌺 Fondo romántico de maravillas para mi florcita 🌺 */
+
+html {
+  min-height: 100%;
+  background: #fce8e8;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 8% 15%,
+      rgba(255, 105, 160, 0.30), transparent 28%),
+    radial-gradient(ellipse at 92% 25%,
+      rgba(244, 95, 145, 0.28), transparent 30%),
+    radial-gradient(ellipse at 10% 75%,
+      rgba(255, 170, 185, 0.30), transparent 28%),
+    radial-gradient(ellipse at 95% 85%,
+      rgba(255, 120, 165, 0.25), transparent 30%),
+    linear-gradient(135deg, #fff0eb, #f9d9e1 48%, #fff0e7);
+
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* Flores decorativas en los bordes */
+body::before,
+body::after {
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  font-size: clamp(45px, 7vw, 90px);
+  line-height: 1.8;
+  white-space: pre-wrap;
+  opacity: 0.38;
+  filter: drop-shadow(0 5px 12px rgba(180, 40, 90, 0.18));
+}
+
+body::before {
+  content: "🌺\A🌸\A🌺";
+  top: 3%;
+  left: 1%;
+  transform: rotate(-12deg);
+  animation: floresSuaves 7s ease-in-out infinite;
+}
+
+body::after {
+  content: "🌸\A🌺\A🌸";
+  right: 1%;
+  bottom: 2%;
+  transform: rotate(12deg);
+  animation: floresSuaves 8s ease-in-out infinite reverse;
+}
+
+@keyframes floresSuaves {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -12px;
+  }
+}
+
+/* Mantiene el contenido por encima de los adornos */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Tarjetas con un toque rosado y delicado */
+.music-player,
+.letter,
+.card,
+.memory-card {
+  box-shadow: 0 10px 35px rgba(160, 55, 90, 0.10);
+}
+
+/* En móviles, el fondo permanece suave */
+@media (max-width: 600px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  body::before,
+  body::after {
+    font-size: 42px;
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    animation: none;
+  }
 }  
   </style>
 </head>
