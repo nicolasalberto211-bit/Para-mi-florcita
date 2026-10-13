@@ -4,16 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#fff0f5">
+  <meta name="description" content="Un pequeño rincón hecho con amor para mi florcita.">
   <title>Para mi florcita 🌷</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -23,15 +19,26 @@
       overflow-x: hidden;
     }
 
+    body::before, body::after {
+      position: fixed;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .15;
+      font-size: clamp(100px, 18vw, 220px);
+    }
+    body::before { content: "🌸"; top: 3%; left: -45px; transform: rotate(-18deg); }
+    body::after { content: "🌷"; right: -40px; bottom: 4%; transform: rotate(18deg); }
+
     section {
+      position: relative;
       width: min(900px, 92%);
       margin: 28px auto;
       padding: 38px 24px;
       text-align: center;
-      background: rgba(255, 255, 255, 0.86);
+      background: rgba(255, 255, 255, .88);
       border: 1px solid #f5dce6;
       border-radius: 24px;
-      box-shadow: 0 8px 28px rgba(130, 53, 82, 0.08);
+      box-shadow: 0 8px 28px rgba(130, 53, 82, .08);
     }
 
     .hero {
@@ -43,11 +50,7 @@
       background: linear-gradient(145deg, #ffe1eb, #fff7fa);
     }
 
-    .flower {
-      font-size: 60px;
-      margin-bottom: 10px;
-    }
-
+    .flower { font-size: 60px; margin-bottom: 10px; }
     .kicker {
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -60,22 +63,13 @@
       margin: 18px 0;
       color: #a74770;
     }
-
     h2 {
       font-size: clamp(25px, 5vw, 36px);
       color: #a74770;
       margin-top: 0;
     }
-
-    p {
-      font-size: 17px;
-      line-height: 1.9;
-    }
-
-    .center {
-      max-width: 650px;
-      margin: 0 auto;
-    }
+    p { font-size: 17px; line-height: 1.9; }
+    .center { max-width: 650px; margin: 0 auto; }
 
     .btn {
       display: inline-block;
@@ -89,36 +83,81 @@
       font: inherit;
       font-size: 15px;
       cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
+      transition: transform .2s, background .2s;
     }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      background: #96385f;
-    }
-
+    .btn:hover { transform: translateY(-2px); background: #96385f; }
     .secondary {
       background: #fff0f5;
       color: #a74770;
       border: 1px solid #efcada;
     }
+    .letter { white-space: normal; text-align: left; }
 
-    .letter {
-      white-space: normal;
-      text-align: left;
+    /* Sobre romántico que se abre para revelar la carta */
+    .letter-envelope-wrap { max-width: 560px; margin: 24px auto 8px; }
+    .letter-envelope {
+      position: relative; display: block; width: min(100%, 390px); height: 220px;
+      margin: 20px auto; border: 0; border-radius: 14px; cursor: pointer;
+      background: linear-gradient(145deg, #f7b8ce, #e98fb0);
+      box-shadow: 0 14px 28px rgba(130, 53, 82, .18); color: #873b5d;
+      transition: transform .25s ease, box-shadow .25s ease; overflow: hidden;
     }
+    .letter-envelope:hover { transform: translateY(-4px); box-shadow: 0 18px 32px rgba(130, 53, 82, .23); }
+    .letter-envelope::before {
+      content: ""; position: absolute; inset: 0; background: #fbdce7;
+      clip-path: polygon(0 0, 50% 58%, 100% 0); z-index: 2;
+      transition: transform .65s ease; transform-origin: top;
+    }
+    .letter-envelope::after {
+      content: ""; position: absolute; inset: 0; background: linear-gradient(35deg, #e88aad, #f6b5cc);
+      clip-path: polygon(0 100%, 0 0, 50% 57%, 100% 0, 100% 100%); z-index: 1;
+    }
+    .envelope-heart { position: absolute; z-index: 3; left: 50%; top: 48%; transform: translate(-50%, -50%); font-size: 42px; }
+    .envelope-label { display: block; margin-top: 12px; font-size: 16px; font-weight: bold; }
+    .letter-envelope.opened::before { transform: rotateX(180deg); }
+    .letter-envelope.opened .envelope-heart { opacity: 0; transition: opacity .2s ease; }
+    #letterContent { animation: letterAppear .8s ease both; }
+    @keyframes letterAppear { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Fotos tipo Polaroid */
+    .memory {
+      min-width: 0; background: #fffdfd; padding: 10px 10px 4px;
+      border: 1px solid #f3e5e9; box-shadow: 0 7px 18px rgba(75, 35, 52, .13);
+      transition: transform .3s ease, box-shadow .3s ease; border-radius: 3px;
+    }
+    .memory:nth-child(odd) { transform: rotate(-1.8deg); }
+    .memory:nth-child(even) { transform: rotate(1.6deg); }
+    .memory:hover { transform: translateY(-6px) rotate(0deg) scale(1.025); box-shadow: 0 14px 25px rgba(75, 35, 52, .19); border-radius: 3px; }
+    .photo { border: 0; border-radius: 0; height: 220px; }
+    .caption { font-size: 14px; margin: 12px 0 13px; color: #765064; }
 
     .counter {
       font-size: clamp(44px, 12vw, 76px);
       font-weight: bold;
       color: #bd527e;
       margin: 20px 0;
+      animation: counterPulse 3s ease-in-out infinite;
     }
+    .small { font-size: 13px; color: #946b7d; }
 
-    .small {
-      font-size: 13px;
+    .music-card {
+      max-width: 580px;
+      margin: 20px auto 0;
+      padding: 22px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #fff0f5, #fff9fb);
+      border: 1px solid #f0d4e0;
+    }
+    .music-icon { font-size: 45px; }
+    .progress-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
       color: #946b7d;
     }
+    #progress { width: 100%; accent-color: #b74f79; cursor: pointer; }
+    #musicStatus { min-height: 22px; }
 
     .gallery {
       display: grid;
@@ -126,8 +165,14 @@
       gap: 13px;
       margin-top: 25px;
     }
-
+    .memory { min-width: 0; transition: transform .35s ease, box-shadow .35s ease; }
+    .memory:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(183, 79, 121, .15);
+      border-radius: 15px;
+    }
     .photo {
+      display: block;
       width: 100%;
       height: 230px;
       object-fit: cover;
@@ -135,37 +180,22 @@
       cursor: zoom-in;
       background: #f8e4ec;
       border: 1px solid #f0d6e1;
-      transition: transform 0.2s;
+      transition: transform .2s;
     }
-
-    .photo:hover {
-      transform: scale(1.02);
-    }
-
-    .caption {
-      font-size: 14px;
-      margin: 8px 0 15px;
-    }
-
-    .memory {
-      min-width: 0;
-    }
+    .photo:hover { transform: scale(1.02); }
+    .caption { font-size: 14px; margin: 8px 0 15px; }
 
     .lightbox {
       display: none;
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: rgba(35, 15, 26, 0.94);
+      background: rgba(35, 15, 26, .94);
       align-items: center;
       justify-content: center;
       padding: 20px;
     }
-
-    .lightbox.active {
-      display: flex;
-    }
-
+    .lightbox.active { display: flex; }
     .lightbox img {
       max-width: 95%;
       max-height: 85vh;
@@ -174,7 +204,6 @@
       object-fit: contain;
       border-radius: 12px;
     }
-
     .close {
       position: absolute;
       top: 12px;
@@ -186,6 +215,21 @@
       cursor: pointer;
     }
 
+    .final-heart {
+      margin-top: 12px;
+      font-size: 32px;
+      animation: heartBeat 1.8s ease-in-out infinite;
+    }
+    #surpriseMessage {
+      margin: 22px auto 0;
+      max-width: 620px;
+      padding: 18px;
+      background: #fff0f5;
+      border-radius: 18px;
+      border: 1px solid #f0d4e0;
+    }
+    [hidden] { display: none !important; }
+
     .heart {
       position: fixed;
       bottom: -35px;
@@ -193,871 +237,251 @@
       pointer-events: none;
       animation: floatUp 3s ease-out forwards;
     }
-
-    @keyframes floatUp {
-      to {
-        transform: translateY(-110vh) rotate(25deg);
-        opacity: 0;
-      }
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 15px;
-      color: #a74770;
-    }
-
-    @media (max-width: 520px) {
-      section {
-        padding: 30px 18px;
-      }
-
-      .gallery {
-        grid-template-columns: 1fr;
-      }
-
-      .photo {
-        height: 260px;
-      }
-
-      p {
-        font-size: 16px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-
-    /* Efectos románticos adicionales */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: .25;
-      background: radial-gradient(
-        circle,
-        rgba(255, 190, 215, .6) 0 2px,
-        transparent 3px
-      );
-      background-size: 170px 170px;
-      animation: softGlow 10s ease-in-out infinite alternate;
-    }
-
-    main, footer {
-      position: relative;
-      z-index: 1;
-    }
-
-    section {
-      position: relative;
-      animation: cardGlow 7s ease-in-out infinite;
-      transition: transform .35s, box-shadow .35s;
-    }
-
-    section:hover {
-      box-shadow: 0 14px 36px rgba(183, 79, 121, .15);
-    }
-
-    .hero h1 {
-      animation: titleIn 1.1s ease both,
-                 titleGlow 4s ease-in-out 1s infinite;
-    }
-
-    .hero .flower {
-      animation: flowerBob 3s ease-in-out infinite;
-      filter: drop-shadow(0 5px 12px rgba(183, 79, 121, .2));
-    }
-
-    .btn {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn::after {
-      content: "";
-      position: absolute;
-      top: -40%;
-      left: -80%;
-      width: 45%;
-      height: 180%;
-      transform: rotate(25deg);
-      background: rgba(255, 255, 255, .32);
-      transition: left .6s;
-      pointer-events: none;
-    }
-
-    .btn:hover::after {
-      left: 130%;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity .8s, transform .8s;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .memory {
-      padding: 8px;
-      border-radius: 19px;
-      background: linear-gradient(
-        145deg,
-        rgba(255, 255, 255, .96),
-        rgba(255, 235, 243, .9)
-      );
-      border: 1px solid #efcada;
-      box-shadow: 0 6px 18px rgba(130, 53, 82, .07);
-      transition: transform .3s, box-shadow .3s;
-    }
-
-    .memory:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 25px rgba(183, 79, 121, .17);
-    }
-
-    .caption {
-      color: #96516d;
-      padding: 0 4px;
-    }
-
-    .counter {
-      text-shadow: 0 0 22px rgba(189, 82, 126, .22);
-      animation: counterPulse 3s ease-in-out infinite;
-    }
-
     .petal {
       position: fixed;
-      top: -40px;
-      z-index: 2;
+      top: -35px;
+      z-index: 9998;
       pointer-events: none;
-      user-select: none;
-      opacity: .78;
       animation: petalFall linear forwards;
-      filter: drop-shadow(0 2px 3px rgba(160, 60, 100, .12));
+      filter: drop-shadow(0 2px 3px rgba(130, 53, 82, .12));
     }
-
     .sparkle {
       position: fixed;
       z-index: 10002;
       pointer-events: none;
-      animation: sparklePop .8s ease-out forwards;
+      animation: sparkleOut .8s ease-out forwards;
     }
 
-    #surpriseMessage {
-      margin: 24px auto 0;
-      max-width: 600px;
-      padding: 22px;
-      border-radius: 18px;
-      color: #a74770;
-      background: linear-gradient(135deg, #fff0f6, #fffafd);
-      border: 1px solid #f2ccdc;
-      box-shadow: 0 0 28px rgba(183, 79, 121, .15);
-      animation: surpriseReveal .8s ease both;
-    }
+    footer { text-align: center; padding: 30px 15px; color: #a74770; }
 
-    .final-heart {
-      display: inline-block;
-      font-size: 34px;
-      margin-top: 8px;
-      animation: heartbeat 1.35s ease-in-out infinite;
-      filter: drop-shadow(0 0 10px rgba(215, 70, 125, .28));
+    @keyframes floatUp {
+      to { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
     }
-
-    @keyframes softGlow {
-      from {
-        opacity: .15;
-        transform: translateY(0);
-      }
-      to {
-        opacity: .34;
-        transform: translateY(-7px);
-      }
-    }
-
-    @keyframes titleIn {
-      from {
-        opacity: 0;
-        transform: translateY(18px) scale(.97);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    @keyframes titleGlow {
-      0%, 100% {
-        text-shadow: 0 0 0 transparent;
-      }
-      50% {
-        text-shadow: 0 0 18px rgba(183, 79, 121, .24);
-      }
-    }
-
-    @keyframes flowerBob {
-      0%, 100% {
-        transform: translateY(0) rotate(-3deg);
-      }
-      50% {
-        transform: translateY(-7px) rotate(3deg);
-      }
-    }
-
-    @keyframes cardGlow {
-      0%, 100% {
-        box-shadow: 0 8px 28px rgba(130, 53, 82, .08);
-      }
-      50% {
-        box-shadow: 0 9px 30px rgba(183, 79, 121, .12);
-      }
-    }
-
     @keyframes counterPulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.025);
-      }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.035); }
     }
-
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.16); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.1); }
+    }
     @keyframes petalFall {
-      0% {
-        transform: translate3d(0, -5vh, 0) rotate(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: .78;
-      }
-      85% {
-        opacity: .72;
-      }
-      100% {
-        transform: translate3d(var(--drift, 60px), 110vh, 0) rotate(540deg);
-        opacity: 0;
-      }
+      to { transform: translate3d(var(--drift, 30px), 110vh, 0) rotate(360deg); opacity: .15; }
+    }
+    @keyframes sparkleOut {
+      from { transform: translate(-50%, -50%) scale(.4) rotate(0); opacity: 0; }
+      30% { opacity: 1; }
+      to { transform: translate(-50%, -80%) scale(1.5) rotate(70deg); opacity: 0; }
     }
 
-    @keyframes sparklePop {
-      0% {
-        transform: scale(.3);
-        opacity: 0;
-      }
-      25% {
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1.6) rotate(35deg) translateY(-22px);
-        opacity: 0;
-      }
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .8s ease, transform .8s ease;
     }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    @keyframes surpriseReveal {
-      from {
-        opacity: 0;
-        transform: translateY(12px) scale(.97);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    @media (max-width: 520px) {
+      section { padding: 30px 18px; }
+      .gallery { grid-template-columns: 1fr; }
+      .photo { height: 260px; }
+      .memory:nth-child(odd), .memory:nth-child(even) { transform: rotate(0deg); }
+      .music-card { padding: 17px; }
     }
-
-    @keyframes heartbeat {
-      0%, 100% {
-        transform: scale(1);
-      }
-      15% {
-        transform: scale(1.16);
-      }
-      30% {
-        transform: scale(1);
-      }
-      45% {
-        transform: scale(1.12);
-      }
-      60% {
-        transform: scale(1);
-      }
-    }
-
     @media (prefers-reduced-motion: reduce) {
-      .petal, .heart, .sparkle, .final-heart,
-      .hero h1, .hero .flower, .counter, section {
-        animation: none !important;
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
       }
-
-      .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-      }
+      .reveal { opacity: 1; transform: none; }
     }
-  .music-player {
-  max-width: 440px;
-  margin: 25px auto 0;
-  padding: 28px 20px;
-  border-radius: 25px;
-  background: linear-gradient(145deg, #fff0f6, #ffffff);
-  border: 1px solid #f0ccdc;
-  box-shadow: 0 12px 30px rgba(183, 79, 121, 0.13);
-}
-
-.music-cover {
-  width: 115px;
-  height: 115px;
-  margin: 0 auto 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 58px;
-  border-radius: 22px;
-  background: linear-gradient(135deg, #f9c6da, #fff4f8);
-  box-shadow: 0 7px 20px rgba(183, 79, 121, 0.16);
-}
-
-.music-player h3 {
-  color: #a74770;
-  margin-bottom: 5px;
-}
-
-.music-subtitle {
-  font-size: 14px;
-  margin-top: 0;
-  color: #946b7d;
-}
-
-.music-controls {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 22px 0;
-  font-size: 12px;
-  color: #946b7d;
-}
-
-#progressBar {
-  flex: 1;
-  min-width: 0;
-  accent-color: #b74f79;
-  cursor: pointer;
-}
-
-#playPauseButton {
-  width: 100%;
-}
-
-#playPauseButton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-#musicStatus {
-  margin-bottom: 0;
-} 
-  /* 🌺 Fondo romántico de maravillas para mi florcita 🌺 */
-
-html {
-  min-height: 100%;
-  background: #fce8e8;
-}
-
-body {
-  position: relative;
-  min-height: 100vh;
-  background:
-    radial-gradient(ellipse at 8% 15%,
-      rgba(255, 105, 160, 0.30), transparent 28%),
-    radial-gradient(ellipse at 92% 25%,
-      rgba(244, 95, 145, 0.28), transparent 30%),
-    radial-gradient(ellipse at 10% 75%,
-      rgba(255, 170, 185, 0.30), transparent 28%),
-    radial-gradient(ellipse at 95% 85%,
-      rgba(255, 120, 165, 0.25), transparent 30%),
-    linear-gradient(135deg, #fff0eb, #f9d9e1 48%, #fff0e7);
-
-  background-attachment: fixed;
-  overflow-x: hidden;
-}
-
-/* Flores decorativas en los bordes */
-body::before,
-body::after {
-  position: fixed;
-  z-index: 0;
-  pointer-events: none;
-  font-size: clamp(45px, 7vw, 90px);
-  line-height: 1.8;
-  white-space: pre-wrap;
-  opacity: 0.38;
-  filter: drop-shadow(0 5px 12px rgba(180, 40, 90, 0.18));
-}
-
-body::before {
-  content: "🌺\A🌸\A🌺";
-  top: 3%;
-  left: 1%;
-  transform: rotate(-12deg);
-  animation: floresSuaves 7s ease-in-out infinite;
-}
-
-body::after {
-  content: "🌸\A🌺\A🌸";
-  right: 1%;
-  bottom: 2%;
-  transform: rotate(12deg);
-  animation: floresSuaves 8s ease-in-out infinite reverse;
-}
-
-@keyframes floresSuaves {
-  0%, 100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: 0 -12px;
-  }
-}
-
-/* Mantiene el contenido por encima de los adornos */
-body > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Tarjetas con un toque rosado y delicado */
-.music-player,
-.letter,
-.card,
-.memory-card {
-  box-shadow: 0 10px 35px rgba(160, 55, 90, 0.10);
-}
-
-/* En móviles, el fondo permanece suave */
-@media (max-width: 600px) {
-  body {
-    background-attachment: scroll;
-  }
-
-  body::before,
-  body::after {
-    font-size: 42px;
-    opacity: 0.25;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body::before,
-  body::after {
-    animation: none;
-  }
-}  
   </style>
 </head>
 
 <body>
-  <main>
-    <section class="hero reveal" id="inicio">
-      <div class="flower">🌷</div>
-      <div class="kicker">Hecho con mucho amor</div>
-      <h1>Para mi florcita</h1>
-
-      <p class="center">
-        Un pequeño rincón de internet, hecho especialmente para ti. 💗
-      </p>
-
-      <a class="btn" href="#carta">Tengo algo que decirte 💌</a>
-      <a class="btn secondary" href="#recuerdos">Nuestros recuerdos 📸</a>
-      <a href="#cancion" class="btn secondary">Tengo algo que decirte🎵 </a>
-    </section>
-<section id="cancion" class="reveal">
-  <div class="flower">🎵</div>
-  <h2>De Mi, para Ti😞</h2>
-
-  <p class="center">
-    Un pedacito de nuestra historia, para ti, mi florcita. ❤️
-  </p>
-
-  <div class="music-player">
-    <div class="music-cover">🌷</div>
-
-    <div class="music-info">
-      <strong>Inolvidable</strong>
-      <span>Reik · Te Amo 💗</span>
+  <section class="hero reveal visible" id="inicio">
+    <div class="flower">🌷</div>
+    <p class="kicker">Un pequeño rincón para ti</p>
+    <h1>Para mi florcita</h1>
+    <p class="center">Porque hay personas que hacen más bonita la vida, y tú eres una de ellas. ❤️</p>
+    <div>
+      <a href="#carta" class="btn">Leer mi carta 💌</a>
+      <a href="#cancion" class="btn secondary">Nuestra canción 🎵</a>
     </div>
+    <a href="#recuerdos" class="btn secondary">Nuestros recuerdos 📸</a>
+  </section>
 
-    <button
-      type="button"
-      id="playMusic"
-      class="play-button"
-      aria-label="Reproducir canción"
-    >▶</button>
-
-    <audio id="loveAudio" preload="metadata">
-  <source src="./Reik%20-%20Inolvidable%20%28Video%29.mp3" type="audio/mpeg">
-  Tu navegador no admite la reproducción de audio.
-</audio>
-
-    <div class="music-progress">
-      <span id="currentTime">0:00</span>
-      <input
-        type="range"
-        id="progress"
-        min="0"
-        max="100"
-        value="0"
-        step="0.1"
-        aria-label="Posición de la canción"
-      >
-      <span id="duration">0:00</span>
+  <section id="cancion" class="reveal">
+    <div class="flower">🎵</div>
+    <h2>Nuestra canción</h2>
+    <p class="center">Una canción que me hace pensar en ti y en todo lo bonito que compartimos. ❤️</p>
+    <div class="music-card">
+      <div class="music-icon">🎧💗</div>
+      <h3>Inolvidable — Reik</h3>
+      <p class="small">Esta canción es para ti, mi florcita.</p>
+      <audio id="loveAudio" preload="metadata">
+        <source src="./Reik%20-%20Inolvidable%20%28Video%29.mp3" type="audio/mpeg">
+        Tu navegador no puede reproducir este audio.
+      </audio>
+      <button class="btn" id="playMusic" type="button">▶ Reproducir canción</button>
+      <div class="progress-row">
+        <span id="currentTime">0:00</span>
+        <input id="progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Progreso de la canción">
+        <span id="duration">0:00</span>
+      </div>
+      <p id="musicStatus" class="small" aria-live="polite">Pulsa reproducir para escuchar nuestra canción 💕</p>
     </div>
+  </section>
 
-    <p id="musicStatus" class="music-status">
-      Pulsa el corazón para escuchar nuestra canción.
-    </p>
-  </div>
-</section>
-    
-    <section id="carta" class="reveal">
-      <div class="flower">💌</div>
-      <h2>Unas palabras para ti</h2>
-
-      <div class="center letter">
-        <p>Mi amor, mi florcita hermosa:</p>
-
-        <p>
-          No sé si alguna vez voy a encontrar las palabras suficientes
-          para explicarte todo lo que siento por ti, pero quiero
-          intentarlo, porque mereces saber lo que hay en mi corazón.
-        </p>
-
-        <p>
-          Primero, quiero pedirte perdón. Perdón por todas las veces
-          en las que he sido un idiota, por cada cagada que me he
-          mandado, por las veces en que te he hecho daño y,
-          especialmente, por haber vuelto a hacer algo de lo que ya
-          habíamos hablado. Sabía que era algo que no debía repetir
-          y, aun así, volví a equivocarme. No tengo excusas para
-          justificarlo. Sé que mis acciones pueden dolerte mucho más
-          que cualquier palabra bonita que pueda decirte ahora.
-        </p>
-
-        <p>
-          A veces me da rabia conmigo mismo, porque siento que tengo
-          a la persona más maravillosa de mi vida a mi lado y, aun así,
-          termino haciendo cosas que pueden poner en riesgo todo lo
-          que hemos construido. Me siento como un mono con una puta
-          neurona, como si no fuera capaz de detenerme un segundo,
-          pensar en las consecuencias y recordar lo mucho que puedes
-          llegar a sufrir por mis decisiones. Pero sé que no basta con
-          insultarme ni con sentirme mal por lo que hice. Tengo que
-          aprender, cambiar y demostrarte con hechos que puedo ser
-          una mejor persona y una mejor pareja para ti.
-        </p>
-
-        <p>
-          <strong>
-            Perdóname por no haber cuidado como debía algo que
-            significa tanto para mí.
-          </strong>
-          Perdóname por haberte hecho dudar, por cualquier inseguridad
-          que te haya provocado y por no haber estado a la altura de
-          la confianza que mereces. Sé que no puedo pedirte que olvides
-          lo sucedido de un día para otro, ni pretender que vuelvas a
-          confiar en mí solamente porque hoy te digo que estoy
-          arrepentido. La confianza se construye con hechos, con tiempo
-          y con decisiones que demuestren que mis palabras son sinceras.
-        </p>
-
-        <p>
-          Y, aun con todos mis errores, quiero darte las gracias.
-        </p>
-
-        <p>
-          Gracias por estar ahí, por los momentos que hemos compartido,
-          por las risas, por las tonterías que hacemos juntos, por cada
-          abrazo, por cada conversación y por todas esas pequeñas cosas
-          que quizás parecen simples, pero que para mí significan
-          muchísimo. Gracias por formar parte de mi vida y por todos
-          los recuerdos que hemos creado. Muchas veces quizás no he
-          sabido valorar las cosas como debía, pero quiero que sepas
-          que tu presencia en mi vida nunca ha sido algo insignificante
-          para mí.
-        </p>
-
-        <p>
-          Me duele no estar contigo. Me duele extrañarte, pensar en
-          todo lo que quisiera contarte, en los momentos en que quisiera
-          abrazarte y en todas esas pequeñas cosas que se sienten
-          distintas cuando no puedo compartirlas contigo. Me duele el
-          alma cuando imagino que podríamos dejar de estar juntos.
-          Me parte el corazón pensar que quizás algún día ya no
-          compartamos nuestros días, nuestras risas, nuestros planes
-          ni esas tonterías que solamente nosotros entendemos.
-        </p>
-
-        <p>
-          <strong>
-            Me cuesta imaginar un futuro en el que tú ya no estés
-            a mi lado.
-          </strong>
-          Cuando pienso en lo que quiero para mi vida, inevitablemente
-          pienso en ti, en las cosas que todavía podríamos vivir,
-          en los lugares que podríamos conocer y en todos los recuerdos
-          que aún podríamos construir. No quiero perder la oportunidad
-          de seguir escribiendo nuestra historia. No porque crea que
-          tengo derecho a que te quedes conmigo, sino porque, si todavía
-          existe una oportunidad para nosotros, quiero luchar por ella
-          de la manera correcta.
-        </p>
-
-        <p>
-          No te escribo esto para presionarte, para hacerte sentir
-          culpable ni para pedirte que dejes de sentir lo que sientes.
-          Sé que tienes derecho a estar triste, enojada, decepcionada
-          o a necesitar tiempo. Quiero respetar tus sentimientos,
-          incluso cuando me duela no poder arreglarlo todo
-          inmediatamente.
-        </p>
-
-        <p>
-          Lo que más deseo es tu perdón y recuperar tu confianza,
-          pero entiendo que no puedo exigirte ninguna de las dos cosas.
-          Solamente puedo demostrarte, día tras día, que estoy dispuesto
-          a hacerme responsable de mis errores y a trabajar de verdad
-          en mí mismo. No quiero seguir prometiendo que voy a cambiar
-          para después volver a lastimarte. Quiero que, si algún día
-          vuelves a mirar nuestras vidas y nuestro amor, puedas ver que
-          mis acciones finalmente estuvieron a la altura de mis palabras.
-        </p>
-
-        <p>
-          Mi florcita, no eres perfecta, yo tampoco lo soy y nuestra
-          relación tampoco tiene que serlo. Pero lo que siento por ti
-          es algo que quiero cuidar, respetar y proteger. Quiero aprender
-          a escucharte mejor, a pensar antes de actuar, a respetar
-          nuestros acuerdos y a no dar por sentado el amor que me
-          entregas. Quiero que puedas sentir tranquilidad conmigo,
-          que no tengas que preguntarte si voy a volver a cometer
-          los mismos errores y que mis acciones te hagan sentir amada,
-          respetada y segura.
-        </p>
-
-        <p>
-          Ojalá pudiera retroceder el tiempo y evitar haberte hecho
-          daño. Ojalá pudiera quitarte de encima toda la pena que te
-          he provocado. Pero no puedo cambiar lo que ya pasó.
-          Lo único que puedo hacer es enfrentar las consecuencias,
-          aprender de verdad y demostrarte quién quiero llegar a ser.
-        </p>
-
-        <p>
-          Si todavía me permites caminar a tu lado, quiero hacerlo
-          mejor. Quiero seguir riéndome contigo, abrazarte después de
-          un día difícil, acompañarte en tus sueños, celebrar tus logros
-          y estar presente también cuando las cosas no salgan como
-          esperamos. Quiero que tengamos muchos más días bonitos,
-          pero también quiero aprender a enfrentar contigo los días
-          difíciles sin volver a cometer los mismos errores.
-        </p>
-
-        <p>
-          No sé qué nos depara el futuro, pero sé que no quiero
-          perderte sin haber hecho todo lo que esté en mis manos
-          para convertirme en alguien que sepa cuidar nuestro amor
-          como merece.
-        </p>
-
-        <p>
-          <strong>Te amo, mi florcita.</strong>
-          Te amo con mis defectos, con mis errores y con todas las
-          cosas que todavía tengo que aprender. Y precisamente porque
-          te amo, quiero dejar de conformarme con decirlo y empezar
-          a demostrártelo cada día.
-        </p>
-
-        <p>
-          Perdóname por las veces en que te he fallado. Gracias por
-          cada momento que me has regalado, por todo lo que hemos
-          vivido y por el lugar que has ocupado en mi corazón.
-        </p>
-
-        <p>
-          Si algún día vuelves a abrazarme con la misma tranquilidad
-          de antes, quiero que sea porque te he demostrado que puedes
-          confiar en mí, no porque te haya convencido con palabras.
-        </p>
-
-        <p>
-          Eres una persona demasiado importante para mí, y nuestra
-          historia significa muchísimo. Ojalá todavía nos queden
-          muchísimas páginas por escribir, muchas fotografías por
-          guardar, muchos lugares por conocer y muchísimos recuerdos
-          que algún día podamos mirar juntos y decir:
-          «Mira todo lo que hemos vivido».
-        </p>
-
-        <p>
-          Con todo mi corazón, con todo mi amor y con la esperanza
-          de poder hacer las cosas mejor:
-        </p>
-
-        <p style="text-align: center; margin-top: 30px;">
-          <strong>
-            Tu persona, que te ama y que quiere aprender a cuidar
-            de ti como mereces. ❤️🌷
-          </strong>
-        </p>
-      </div>
-    </section>
-    <section id="tiempo" class="reveal">
-      <h2>Y que sigan los recuerdos... ⏳</h2>
-
-      <p class="center">
-        Cada día a tu lado suma una historia más.
-      </p>
-
-      <div class="counter" id="days">Calculando...</div>
-
-      <p>días compartiendo esta historia ❤️</p>
-
-      <p class="small">
-        Desde el 27 de agosto de 2025.
-      </p>
-    </section>
-
-    <section id="recuerdos" class="reveal">
-      <div class="flower">📸</div>
-      <h2>Nuestros recuerdos</h2>
-
-      <p class="center">
-        Pequeños momentos que se convierten en grandes recuerdos.
-        Toca una foto para verla ampliada. 💕
-      </p>
-
-      <div class="gallery">
-        <div class="memory">
-          <img class="photo" src="monitos.jpg"
-               alt="Uno de nuestros recuerdos juntos" loading="lazy">
-          <p class="caption">Un recuerdo especial ❤️</p>
-        </div>
-
-        <div class="memory">
-          <img class="photo" src="capitan.jpg"
-               alt="Nuestro recuerdo con Capitán" loading="lazy">
-          <p class="caption">Momentos que alegran el corazón 🐾</p>
-        </div>
-
-        <div class="memory">
-          <img class="photo" src="girasoles.jpg"
-               alt="Un recuerdo de girasoles" loading="lazy">
-          <p class="caption">Como un pequeño girasol 🌻</p>
-        </div>
-
-        <div class="memory">
-          <img class="photo" src="mascarillas.jpg"
-               alt="Un momento divertido juntos" loading="lazy">
-          <p class="caption">Nuestras locuras, me encanta cuando nos juntamos a hacer cositas 😂</p>
-        </div>
-
-        <div class="memory">
-          <img class="photo" src="piscina.jpg"
-               alt="Un recuerdo de un día especial" loading="lazy">
-          <p class="caption">Días para recordar ☀️</p>
-        </div>
-
-        <div class="memory">
-          <img class="photo" src="tonterias.jpg"
-               alt="Una de nuestras tonterías" loading="lazy">
-          <p class="caption">Aquí comenzó todito, el dia en que le hable 💗</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="sorpresa" class="reveal">
-      <div class="flower">💝</div>
-      <h2>Una última sorpresa</h2>
-
-      <p class="center">
-        Si pudiera elegir de nuevo, me encantaría seguir creando
-        recuerdos contigo.
-      </p>
-
-      <button class="btn" id="surpriseButton" type="button">
-        Pulsa aquí, mi amor 💗
+  <section id="carta" class="reveal">
+    <div class="flower">💌</div>
+    <h2>Una carta para ti</h2>
+    <p class="center">Preparé estas palabras con mucho cariño. Pulsa el sobre para abrirlo. 💗</p>
+    <div class="letter-envelope-wrap" id="letterEnvelopeWrap">
+      <button class="letter-envelope" id="openLetter" type="button" aria-controls="letterContent" aria-expanded="false">
+        <span class="envelope-heart">💌</span>
       </button>
+      <span class="envelope-label" id="envelopeLabel">Toca aquí para abrir tu carta 🌷</span>
+    </div>
+    <div class="center letter" id="letterContent" hidden>
+      <p>Mi amor, mi florcita hermosa:</p>
 
-      <div class="final-heart" aria-hidden="true">💗</div>
+      <p>No sé si alguna vez voy a encontrar las palabras suficientes para explicarte todo lo que siento por ti, pero quiero intentarlo, porque mereces saber lo que hay en mi corazón.</p>
 
-      <p id="surpriseMessage" hidden>
-        Cupon valido para lo que desees mi vida 🥹. 
-        Eres una personita muy especial para mí.
-        Gracias por formar parte de mi historia. Eres la personita que nunca quiero perder y por la culpa de este estupido ser humano te quito parte de tu brillo, pero juro que lo hare volver en algun momento, Te amo muchísimo. 🌷❤️
-      </p>
+      <p>Primero, quiero pedirte perdón. Perdón por todas las veces en las que he sido un idiota, por cada cagada que me he mandado, por las veces en que te he hecho daño y, especialmente, por haber vuelto a hacer algo de lo que ya habíamos hablado. Sabía que era algo que no debía repetir y, aun así, volví a equivocarme. No tengo excusas para justificarlo. Sé que mis acciones pueden dolerte mucho más que cualquier palabra bonita que pueda decirte ahora.</p>
 
-      <p>
-        <a class="btn secondary" href="#inicio">Volver al comienzo ↑</a>
-      </p>
-    </section>
-  </main>
+      <p>A veces me da rabia conmigo mismo, porque siento que tengo a la persona más maravillosa de mi vida a mi lado y, aun así, termino haciendo cosas que pueden poner en riesgo todo lo bonito que tenemos. No quiero que mis errores te hagan sentir que no eres suficiente, porque lo eres y mucho más. Tú mereces amor, respeto, tranquilidad y una persona que cuide tu corazón como corresponde.</p>
+
+      <p>Sé que decirte que te amo no basta si mis acciones no acompañan esas palabras. No quiero pedirte que olvides lo que pasó ni pretender que todo se arregle de un día para otro. Quiero aprender de mis errores y demostrarte con hechos que puedo hacerlo mejor.</p>
+
+      <p>Gracias por cada momento bonito, por las risas, por las tonterías que hacemos juntos, por los abrazos y por todas esas pequeñas cosas que para mí significan muchísimo. Incluso los momentos más simples se vuelven especiales cuando estoy contigo, porque no se trata solamente de lo que hacemos, sino de tenerte a mi lado y compartir la vida contigo.</p>
+
+      <p>Me encanta nuestra forma de ser, nuestras bromas, nuestras locuras y esos momentos en los que nos reímos por cualquier tontería. Son recuerdos que guardo con muchísimo cariño y que me hacen valorar aún más lo que tenemos.</p>
+
+      <p>Quiero seguir construyendo algo bonito contigo, aprender a escucharte mejor, cuidarte y hacerte sentir amada. Sé que el amor no se demuestra solamente con promesas, sino con pequeños gestos, respeto, sinceridad y acciones que se mantienen en el tiempo.</p>
+
+      <p>No espero que estas palabras solucionen todo de inmediato. Solo quiero que sepas lo importante que eres para mí y que mi intención es cuidar lo nuestro de una manera más madura y consciente. Quiero que puedas sentirte tranquila, querida y segura a mi lado.</p>
+
+      <p>Gracias por ser tú, por tu cariño y por todos los momentos que hemos compartido. Me hace feliz pensar en nuestros recuerdos y en todos los que todavía podemos crear, paso a paso, sin dejar de aprender el uno del otro.</p>
+
+      <p>Te amo muchísimo, mi florcita hermosa. Espero poder demostrarte cada día, con hechos y no solamente con palabras, lo especial que eres para mí.</p>
+
+      <p>Con todo mi amor, para ti. ❤️</p>
+      <p style="text-align:center; font-size:24px;">🌷💗🌷</p>
+      <p style="text-align:center;"><button class="btn secondary" id="closeLetter" type="button">Guardar mi carta 💌</button></p>
+    </div>
+  </section>
+
+  <section id="tiempo" class="reveal">
+    <div class="flower">🗓️</div>
+    <h2>Todo este tiempo juntos</h2>
+    <p class="center">Desde aquel 27 de agosto de 2025, nuestra historia sigue sumando momentos.</p>
+    <div class="counter" id="days">0</div>
+    <p class="center">días compartiendo esta historia ❤️</p>
+    <p class="small">Cada día es una nueva oportunidad para cuidarnos y crear recuerdos bonitos.</p>
+  </section>
+
+  <section id="recuerdos" class="reveal">
+    <div class="flower">📸</div>
+    <h2>Nuestros recuerdos</h2>
+    <p class="center">Pequeños momentos que se convierten en grandes recuerdos. Toca una foto para verla ampliada. 💕</p>
+
+    <div class="gallery">
+      <div class="memory">
+        <img class="photo" src="monitos.jpg" alt="Uno de nuestros recuerdos juntos" loading="lazy">
+        <p class="caption">Un recuerdo especial ❤️</p>
+      </div>
+      <div class="memory">
+        <img class="photo" src="capitan.jpg" alt="Nuestro recuerdo con Capitán" loading="lazy">
+        <p class="caption">Momentos que alegran el corazón 🐾</p>
+      </div>
+      <div class="memory">
+        <img class="photo" src="girasoles.jpg" alt="Un recuerdo de girasoles" loading="lazy">
+        <p class="caption">Como un pequeño girasol 🌻</p>
+      </div>
+      <div class="memory">
+        <img class="photo" src="mascarillas.jpg" alt="Un momento divertido juntos" loading="lazy">
+        <p class="caption">Nuestras locuras 😂</p>
+      </div>
+      <div class="memory">
+        <img class="photo" src="piscina.jpg" alt="Un recuerdo de un día especial" loading="lazy">
+        <p class="caption">Días para recordar ☀️</p>
+      </div>
+      <div class="memory">
+        <img class="photo" src="tonterias.jpg" alt="Una de nuestras tonterías" loading="lazy">
+        <p class="caption">Aquí comenzó todito 💗</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sorpresa" class="reveal">
+    <div class="flower">💝</div>
+    <h2>Una última cosita para ti</h2>
+    <p class="center">Tengo una pequeña sorpresa guardada para mi persona favorita.</p>
+    <button class="btn" id="surpriseButton" type="button">Abrir mi sorpresa 💗</button>
+    <div id="surpriseMessage" hidden>
+      <p>Mi florcita, entre tantas personas en el mundo, me alegra compartir esta historia contigo. Quiero seguir llenando nuestros días de cariño, risas, aventuras y recuerdos que nos hagan sonreír. ❤️</p>
+      <p>Te amo muchísimo.</p>
+      <div class="final-heart">💖</div>
+    </div>
+  </section>
 
   <footer>
-    Hecho con amor, para mi hermosa florcita 🌷
+    Hecho con mucho amor para mi florcita 🌷
+    <p class="small">Una página llena de recuerdos, cariño y amor. ❤️</p>
+    <a class="btn secondary" href="#inicio">Volver al principio ↑</a>
   </footer>
 
-  <div class="lightbox" id="visorFotos"
-       role="dialog" aria-modal="true" aria-label="Foto ampliada">
-    <button class="close" id="cerrarVisor"
-            type="button" aria-label="Cerrar foto">×</button>
+  <div class="lightbox" id="visorFotos" role="dialog" aria-modal="true" aria-label="Fotografía ampliada">
+    <button class="close" id="cerrarVisor" type="button" aria-label="Cerrar fotografía">&times;</button>
     <img id="fotoAmpliada" src="" alt="">
   </div>
 
   <script>
     "use strict";
 
-    // Fecha en que comenzó nuestra relación.
-    const fechaInicio = "2025-08-27";
+    // Abrir y volver a guardar la carta.
+    const openLetter = document.getElementById("openLetter");
+    const letterContent = document.getElementById("letterContent");
+    const envelopeLabel = document.getElementById("envelopeLabel");
+    const closeLetter = document.getElementById("closeLetter");
 
-    // Contador de días.
+    openLetter.addEventListener("click", () => {
+      letterContent.hidden = false;
+      openLetter.classList.add("opened");
+      openLetter.setAttribute("aria-expanded", "true");
+      envelopeLabel.textContent = "Una carta escrita desde el corazón ❤️";
+      document.getElementById("letterEnvelopeWrap").style.marginBottom = "28px";
+      letterContent.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    closeLetter.addEventListener("click", () => {
+      letterContent.hidden = true;
+      openLetter.classList.remove("opened");
+      openLetter.setAttribute("aria-expanded", "false");
+      envelopeLabel.textContent = "Toca aquí para abrir tu carta 🌷";
+      document.getElementById("letterEnvelopeWrap").scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    // Contador desde el inicio de la relación.
+    const fechaInicio = "2025-08-27";
     function actualizarContador() {
       const contador = document.getElementById("days");
-      if (!contador) return;
-
-      const partes = fechaInicio.split("-").map(Number);
-      const inicio = new Date(
-        partes[0], partes[1] - 1, partes[2]
-      );
-
+      const [anio, mes, dia] = fechaInicio.split("-").map(Number);
+      const inicio = new Date(anio, mes - 1, dia);
       const hoy = new Date();
       inicio.setHours(0, 0, 0, 0);
       hoy.setHours(0, 0, 0, 0);
-
-      if (Number.isNaN(inicio.getTime())) {
-        contador.textContent = "Fecha inválida";
-        return;
-      }
-
-      const dias = Math.max(
-        0,
-        Math.floor((hoy.getTime() - inicio.getTime()) / 86400000)
-      );
-
+      const dias = Math.max(0, Math.floor((hoy.getTime() - inicio.getTime()) / 86400000));
       contador.textContent = dias.toLocaleString("es-CL");
     }
-
     actualizarContador();
 
-    // Galería de fotos ampliables.
+    // Galería ampliable.
     const visor = document.getElementById("visorFotos");
     const fotoAmpliada = document.getElementById("fotoAmpliada");
     const cerrarVisor = document.getElementById("cerrarVisor");
@@ -1071,64 +495,45 @@ body > * {
     document.querySelectorAll(".photo").forEach((foto) => {
       foto.addEventListener("click", () => {
         if (!foto.naturalWidth) return;
-
         fotoAmpliada.src = foto.src;
         fotoAmpliada.alt = foto.alt;
         visor.classList.add("active");
         document.body.style.overflow = "hidden";
+        cerrarVisor.focus();
       });
     });
 
     cerrarVisor.addEventListener("click", cerrarFoto);
-
     visor.addEventListener("click", (evento) => {
-      if (evento.target === visor) {
-        cerrarFoto();
-      }
+      if (evento.target === visor) cerrarFoto();
     });
-
     document.addEventListener("keydown", (evento) => {
-      if (evento.key === "Escape") {
-        cerrarFoto();
-      }
+      if (evento.key === "Escape") cerrarFoto();
     });
 
-    // Sorpresa romántica.
-    document.getElementById("surpriseButton")
-      .addEventListener("click", () => {
-        const mensaje = document.getElementById("surpriseMessage");
-        mensaje.hidden = false;
-        lanzarCorazones(20);
-      });
-
-    // Animación de corazones.
+    // Sorpresa y lluvia de corazones.
     function lanzarCorazones(cantidad) {
       const simbolos = ["❤️", "💕", "💗", "💖", "🌷"];
-
       for (let i = 0; i < cantidad; i++) {
         const corazon = document.createElement("span");
-
         corazon.className = "heart";
-        corazon.textContent =
-          simbolos[Math.floor(Math.random() * simbolos.length)];
-
+        corazon.textContent = simbolos[Math.floor(Math.random() * simbolos.length)];
         corazon.style.left = Math.random() * 100 + "vw";
-        corazon.style.fontSize =
-          (18 + Math.random() * 20) + "px";
-        corazon.style.animationDelay =
-          (Math.random() * 1.5) + "s";
-
+        corazon.style.fontSize = (18 + Math.random() * 20) + "px";
+        corazon.style.animationDelay = (Math.random() * 1.2) + "s";
         document.body.appendChild(corazon);
-
-        corazon.addEventListener("animationend", () => {
-          corazon.remove();
-        });
+        corazon.addEventListener("animationend", () => corazon.remove(), { once: true });
       }
     }
 
-    // Aparición suave de las secciones al desplazarse.
-    const elementosReveal = document.querySelectorAll(".reveal");
+    document.getElementById("surpriseButton").addEventListener("click", () => {
+      document.getElementById("surpriseMessage").hidden = false;
+      lanzarCorazones(24);
+    });
 
+    // Animación de aparición de secciones.
+    const reducirMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const elementosReveal = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window) {
       const observador = new IntersectionObserver((entradas) => {
         entradas.forEach((entrada) => {
@@ -1138,160 +543,105 @@ body > * {
           }
         });
       }, { threshold: 0.12 });
-
-      elementosReveal.forEach((elemento) => {
-        observador.observe(elemento);
-      });
+      elementosReveal.forEach((elemento) => observador.observe(elemento));
     } else {
-      elementosReveal.forEach((elemento) => {
-        elemento.classList.add("visible");
-      });
+      elementosReveal.forEach((elemento) => elemento.classList.add("visible"));
     }
 
-    // Pétalos cayendo suavemente.
-    const reducirMovimiento = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
+    // Pétalos cayendo.
     function crearPetalo() {
       if (reducirMovimiento || document.hidden) return;
-
       const petalo = document.createElement("span");
+      const simbolos = ["🌸", "🌹", "🌷", "💕"];
       petalo.className = "petal";
-      petalo.textContent =
-        ["🌸", "🌹", "🌷", "💕"][Math.floor(Math.random() * 4)];
-
+      petalo.textContent = simbolos[Math.floor(Math.random() * simbolos.length)];
       petalo.style.left = Math.random() * 100 + "vw";
       petalo.style.fontSize = (12 + Math.random() * 12) + "px";
-
-      petalo.style.setProperty(
-        "--drift",
-        (Math.random() * 180 - 90) + "px"
-      );
-
-      petalo.style.animationDuration =
-        (8 + Math.random() * 7) + "s";
-
+      petalo.style.setProperty("--drift", (Math.random() * 180 - 90) + "px");
+      petalo.style.animationDuration = (8 + Math.random() * 7) + "s";
       document.body.appendChild(petalo);
-
-      petalo.addEventListener(
-        "animationend",
-        () => petalo.remove(),
-        { once: true }
-      );
+      petalo.addEventListener("animationend", () => petalo.remove(), { once: true });
     }
 
     if (!reducirMovimiento) {
-      for (let i = 0; i < 5; i++) {
-        setTimeout(crearPetalo, i * 900);
-      }
-
+      for (let i = 0; i < 5; i++) setTimeout(crearPetalo, i * 900);
       setInterval(crearPetalo, 2200);
     }
 
-    // Destellos discretos al hacer clic.
+    // Destellos al tocar o hacer clic.
     document.addEventListener("click", (evento) => {
-      if (
-        reducirMovimiento ||
-        evento.target.closest(".lightbox")
-      ) {
-        return;
-      }
-
+      if (reducirMovimiento || evento.target.closest(".lightbox")) return;
       const destello = document.createElement("span");
       destello.className = "sparkle";
       destello.textContent = "✦";
-
       destello.style.left = evento.clientX + "px";
       destello.style.top = evento.clientY + "px";
-
-      destello.style.color = [
-        "#d85b91",
-        "#f0b7cc",
-        "#c58bba"
-      ][Math.floor(Math.random() * 3)];
-
-      destello.style.fontSize =
-        (14 + Math.random() * 12) + "px";
-
+      destello.style.color = ["#d85b91", "#f0b7cc", "#c58bba"][Math.floor(Math.random() * 3)];
+      destello.style.fontSize = (14 + Math.random() * 12) + "px";
       document.body.appendChild(destello);
-
-      destello.addEventListener(
-        "animationend",
-        () => destello.remove(),
-        { once: true }
-      );
+      destello.addEventListener("animationend", () => destello.remove(), { once: true });
     });
-// Controles del reproductor personalizado.
-const loveAudio = document.getElementById("loveAudio");
-const playMusic = document.getElementById("playMusic");
-const progress = document.getElementById("progress");
-const currentTime = document.getElementById("currentTime");
-const duration = document.getElementById("duration");
-const musicStatus = document.getElementById("musicStatus");
 
-function formatMusicTime(seconds) {
-  if (!Number.isFinite(seconds)) return "0:00";
+    // Reproductor de música.
+    const audio = document.getElementById("loveAudio");
+    const botonMusica = document.getElementById("playMusic");
+    const barraProgreso = document.getElementById("progress");
+    const tiempoActual = document.getElementById("currentTime");
+    const duracionTotal = document.getElementById("duration");
+    const estadoMusica = document.getElementById("musicStatus");
 
-  const minutes = Math.floor(seconds / 60);
-  const remaining = Math.floor(seconds % 60);
-
-  return minutes + ":" + String(remaining).padStart(2, "0");
-}
-
-playMusic.addEventListener("click", async () => {
-  if (loveAudio.paused) {
-    try {
-      await loveAudio.play();
-    } catch (error) {
-      musicStatus.textContent =
-        "No se pudo reproducir. Revisa el archivo de audio.";
+    function formatoTiempo(segundos) {
+      if (!Number.isFinite(segundos) || segundos < 0) return "0:00";
+      return Math.floor(segundos / 60) + ":" + String(Math.floor(segundos % 60)).padStart(2, "0");
     }
-  } else {
-    loveAudio.pause();
-  }
-});
 
-loveAudio.addEventListener("play", () => {
-  playMusic.textContent = "❚❚ Pausar canción";
-  musicStatus.textContent = "Reproduciendo para ti 💗";
-});
+    function actualizarProgreso() {
+      const actual = audio.currentTime || 0;
+      const duracion = audio.duration || 0;
+      tiempoActual.textContent = formatoTiempo(actual);
+      duracionTotal.textContent = formatoTiempo(duracion);
+      barraProgreso.value = duracion ? (actual / duracion) * 100 : 0;
+    }
 
-loveAudio.addEventListener("pause", () => {
-  playMusic.textContent = "▶ Reproducir canción";
-});
+    botonMusica.addEventListener("click", async () => {
+      if (audio.paused) {
+        try {
+          await audio.play();
+        } catch (error) {
+          estadoMusica.textContent = "No se pudo reproducir. Revisa que el archivo MP3 esté en la misma carpeta.";
+        }
+      } else {
+        audio.pause();
+      }
+    });
 
-loveAudio.addEventListener("loadedmetadata", () => {
-  duration.textContent = formatMusicTime(loveAudio.duration);
-});
+    audio.addEventListener("play", () => {
+      botonMusica.textContent = "⏸ Pausar canción";
+      estadoMusica.textContent = "Reproduciendo para ti 💗";
+    });
+    audio.addEventListener("pause", () => {
+      botonMusica.textContent = "▶ Reproducir canción";
+      if (audio.currentTime > 0 && !audio.ended) estadoMusica.textContent = "Canción pausada";
+    });
+    audio.addEventListener("ended", () => {
+      botonMusica.textContent = "▶ Reproducir canción";
+      estadoMusica.textContent = "La canción terminó 💕";
+    });
+    audio.addEventListener("timeupdate", actualizarProgreso);
+    audio.addEventListener("loadedmetadata", actualizarProgreso);
+    audio.addEventListener("error", () => {
+      estadoMusica.textContent = "No se encontró la canción. Comprueba el nombre del MP3.";
+    });
 
-loveAudio.addEventListener("timeupdate", () => {
-  currentTime.textContent = formatMusicTime(loveAudio.currentTime);
+    barraProgreso.addEventListener("input", () => {
+      if (Number.isFinite(audio.duration) && audio.duration > 0) {
+        audio.currentTime = (Number(barraProgreso.value) / 100) * audio.duration;
+      }
+    });
 
-  if (Number.isFinite(loveAudio.duration) && loveAudio.duration > 0) {
-    progress.value =
-      (loveAudio.currentTime / loveAudio.duration) * 100;
-  }
-});
-
-progress.addEventListener("input", () => {
-  if (Number.isFinite(loveAudio.duration) && loveAudio.duration > 0) {
-    loveAudio.currentTime =
-      (Number(progress.value) / 100) * loveAudio.duration;
-  }
-});
-
-loveAudio.addEventListener("ended", () => {
-  playMusic.textContent = "▶ Reproducir nuevamente";
-  progress.value = 0;
-  currentTime.textContent = "0:00";
-  musicStatus.textContent = "¿La escuchamos otra vez? 🌷";
-});
-
-loveAudio.addEventListener("error", () => {
-  musicStatus.textContent =
-    "No se encuentra el audio. Comprueba el nombre del archivo.";
-});
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) actualizarContador();
+    });
   </script>
 </body>
 </html>
