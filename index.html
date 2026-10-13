@@ -1131,75 +1131,76 @@
         { once: true }
       );
     });
-    ```javascript
-// Funcionamiento del reproductor de música.
-const audio = document.getElementById("romanticAudio");
-const playButton = document.getElementById("playPauseButton");
-const progressBar = document.getElementById("progressBar");
-const currentTimeText = document.getElementById("currentTime");
-const durationText = document.getElementById("duration");
+   ```javascript
+// Controles del reproductor personalizado.
+const loveAudio = document.getElementById("loveAudio");
+const playMusic = document.getElementById("playMusic");
+const progress = document.getElementById("progress");
+const currentTime = document.getElementById("currentTime");
+const duration = document.getElementById("duration");
 const musicStatus = document.getElementById("musicStatus");
 
-function formatTime(seconds) {
+function formatMusicTime(seconds) {
   if (!Number.isFinite(seconds)) return "0:00";
 
   const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = Math.floor(seconds % 60);
+  const remaining = Math.floor(seconds % 60);
 
-  return minutes + ":" + String(remainingSeconds).padStart(2, "0");
+  return minutes + ":" + String(remaining).padStart(2, "0");
 }
 
-playButton.addEventListener("click", async () => {
-  if (audio.paused) {
+playMusic.addEventListener("click", async () => {
+  if (loveAudio.paused) {
     try {
-      await audio.play();
+      await loveAudio.play();
     } catch (error) {
       musicStatus.textContent =
-        "No se pudo reproducir. Revisa que el MP3 esté subido a GitHub.";
+        "No se pudo reproducir. Revisa el archivo de audio.";
     }
   } else {
-    audio.pause();
+    loveAudio.pause();
   }
 });
 
-audio.addEventListener("play", () => {
-  playButton.textContent = "❚❚ Pausar canción";
+loveAudio.addEventListener("play", () => {
+  playMusic.textContent = "❚❚ Pausar canción";
   musicStatus.textContent = "Reproduciendo para ti 💗";
 });
 
-audio.addEventListener("pause", () => {
-  playButton.textContent = "▶ Reproducir nuestra canción";
+loveAudio.addEventListener("pause", () => {
+  playMusic.textContent = "▶ Reproducir canción";
 });
 
-audio.addEventListener("loadedmetadata", () => {
-  durationText.textContent = formatTime(audio.duration);
+loveAudio.addEventListener("loadedmetadata", () => {
+  duration.textContent = formatMusicTime(loveAudio.duration);
 });
 
-audio.addEventListener("timeupdate", () => {
-  currentTimeText.textContent = formatTime(audio.currentTime);
+loveAudio.addEventListener("timeupdate", () => {
+  currentTime.textContent = formatMusicTime(loveAudio.currentTime);
 
-  if (Number.isFinite(audio.duration) && audio.duration > 0) {
-    progressBar.value = (audio.currentTime / audio.duration) * 100;
+  if (Number.isFinite(loveAudio.duration) && loveAudio.duration > 0) {
+    progress.value =
+      (loveAudio.currentTime / loveAudio.duration) * 100;
   }
 });
 
-progressBar.addEventListener("input", () => {
-  if (Number.isFinite(audio.duration) && audio.duration > 0) {
-    audio.currentTime =
-      (Number(progressBar.value) / 100) * audio.duration;
+progress.addEventListener("input", () => {
+  if (Number.isFinite(loveAudio.duration) && loveAudio.duration > 0) {
+    loveAudio.currentTime =
+      (Number(progress.value) / 100) * loveAudio.duration;
   }
 });
 
-audio.addEventListener("ended", () => {
-  playButton.textContent = "▶ Reproducir nuevamente";
-  progressBar.value = 0;
-  currentTimeText.textContent = "0:00";
+loveAudio.addEventListener("ended", () => {
+  playMusic.textContent = "▶ Reproducir nuevamente";
+  progress.value = 0;
+  currentTime.textContent = "0:00";
   musicStatus.textContent = "¿La escuchamos otra vez? 🌷";
 });
 
-audio.addEventListener("error", () => {
+loveAudio.addEventListener("error", () => {
   musicStatus.textContent =
-    "No encontramos el MP3. Revisa su nombre y ubicación.";
+    "No se encuentra el audio. Comprueba el nombre del archivo.";
 });
 ```
   </script>
